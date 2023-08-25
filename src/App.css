@@ -7,3 +7,15 @@ main {
   vertical-align: center;
   line-height: 100vh
 }
+
+/* SIGN IN SECTION */
+.signIn {
+  width: 30%;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+.createAccount {
+  width: 30%;
+  margin-bottom: 50px;
+}

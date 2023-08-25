@@ -1,10 +1,14 @@
 import './App.css'
+import SignUp from './components/SignUp/SignUp';
+import {Routes, Route} from 'react-router-dom';
 
 const App = () => {
   return (
-    <main>
-      <h1 className="text-sky-500 font-bold">Hello</h1>
-    </main>
+    <>
+      <Routes>
+        <Route path='/' element={<SignUp />} />
+      </Routes>
+    </>
   );
 }
 
