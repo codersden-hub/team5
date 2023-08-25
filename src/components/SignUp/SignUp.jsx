@@ -50,9 +50,11 @@ const SignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="border-2"
             style={{
               width: "100%",
               padding: "5px",
+              border: "2px",
               borderRadius: "5px",
               borderColor: "red",
             }}
@@ -95,7 +97,7 @@ const SignUp = () => {
         <p className="text-center">New to Brequet?</p>
         <hr />
         <Link to="/createaccount">
-          <button className="w-full bg-secondary p-2 round">
+          <button className="w-full bg-slate-400 p-2 round">
             CREATE ACCOUNT
           </button>
         </Link>
