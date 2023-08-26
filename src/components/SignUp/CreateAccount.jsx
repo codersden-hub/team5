@@ -13,7 +13,7 @@ function CreateAccount() {
       confirmNewPassword,
       setConfirmNewPassword,
       createAccount,
-      message,
+      emailValidMessage,
     } = useGlobalContext();
   return (
     <div className="flex flex-col items-center mb-5">
@@ -38,7 +38,7 @@ function CreateAccount() {
               color: "red",
             }}
           >
-            {message}
+            {emailValidMessage}
           </span>
 
           <h5 className="mt-4">Name</h5>
@@ -87,9 +87,7 @@ function CreateAccount() {
         <hr />
         <p>
           Already have an account?
-          <Link to="/">
-            <h6>Sign In</h6>
-          </Link>
+          <Link to="/">Sign In</Link>
         </p>
       </div>
     </div>

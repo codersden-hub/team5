@@ -13,21 +13,26 @@ const AppContext = React.createContext();
 export const ContextApp = ({children}) => {
     const [user, setUser] = useState();
     const [message, setMessage] = useState("");
+    const [emailValidMessage, setEmailValidMessage] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [name, setName] = useState("");
+    const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
     const navigate = useNavigate();
 
     // CREATE ACCOUNT FUNCTION FOR NEW USERS
     const auth = getAuth(app);
-    
+
     const createAccount = () => {
-      if (validator.isEmail(email)) {
-        setMessage("Great!!");
+      if (validator.isEmail(newEmail)) {
+        setEmailValidMessage("Great!!");
       } else {
-        setMessage("Please, enter valid Email!");
+        setEmailValidMessage("Please, enter valid Email!");
       }
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, newEmail, newPassword)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -80,7 +85,16 @@ export const ContextApp = ({children}) => {
           setEmail,
           setPassword,
           email,
-          password
+          password,
+          newEmail,
+          setNewEmail,
+          newPassword,
+          setNewPassword,
+          name,
+          setName,
+          confirmNewPassword,
+          setConfirmNewPassword,
+          emailValidMessage,
         }}
       >
         {children}

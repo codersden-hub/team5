@@ -49,7 +49,7 @@ const SignUp = () => {
         </div>
         <button
           className="w-full text-light-text bg-head-blue p-2 round my-4"
-          onClick={() => signIn}
+          onClick={() => signIn()}
         >
           SIGN IN
         </button>
