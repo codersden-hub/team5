@@ -1,47 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from "../../firebase";
-import validator from "validator";
+import { useGlobalContext } from "../context";
 
 const SignUp = () => {
-  const [user, setUser] = useState();
-  const [message, setMessage] = useState("");
-  // const { setUser, message, setMessage } = useGlobalContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
+  const { message, signIn, setEmail, setPassword, email, password } = useGlobalContext();
 
   // SIGN IN FUNCTION OF EXISTING USERS
-  const auth = getAuth(app);
-
-  const signIn = () => {
-    if (validator.isEmail(email)) {
-      setMessage("Thank you");
-    } else {
-      setMessage("Please, enter valid Email!");
-    }
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        if (user) {
-          setUser(user);
-          // navigate("/");
-          setTimeout(() => {
-            alert("Success");
-          }, 500);
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        alert(errorCode);
-      });
-  };
   return (
     <div className="flex flex-col items-center">
-      <div className="flex justify-center">
-      </div>
       <div className="signIn mt-4 bg-white">
         <h2 className="font-bold pb-3">Sign In</h2>
         <div className="form">
@@ -82,22 +48,18 @@ const SignUp = () => {
           />
         </div>
         <button
-          className="w-full bg-red-500 p-2 round my-4"
-          onClick={() => signIn()}
+          className="w-full text-light-text bg-head-blue p-2 round my-4"
+          onClick={() => signIn}
         >
           SIGN IN
         </button>
-        <p>
-          By continuing, you agree to Brequet's Conditions of Use and Privacy
-          Notice.
-        </p>
       </div>
       <div className="createAccount">
-        <hr />
-        <p className="text-center">New to Brequet?</p>
-        <hr />
+        <hr className="my-3"/>
+        <p className="text-center">New to Coder's-Den Blog?</p>
+        <hr className="my-3"/>
         <Link to="/createaccount">
-          <button className="w-full bg-slate-400 p-2 round">
+          <button className="w-full bg-body-slate p-2 round">
             CREATE ACCOUNT
           </button>
         </Link>
