@@ -48,16 +48,16 @@ const SignUp = () => {
           />
         </div>
         <button
-          className="w-full text-light-text bg-head-blue p-2 round my-4"
+          className="w-full text-cards-light bg-hover-dark p-2 round my-4"
           onClick={() => signIn()}
         >
           SIGN IN
         </button>
       </div>
       <div className="createAccount">
-        <hr className="my-3"/>
+        <hr className="my-3" />
         <p className="text-center">New to Coder's-Den Blog?</p>
-        <hr className="my-3"/>
+        <hr className="my-3" />
         <Link to="/createaccount">
           <button className="w-full bg-body-slate p-2 round">
             CREATE ACCOUNT
