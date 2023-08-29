@@ -12,6 +12,41 @@ body {
   font-family: "Inconsolata", "sans-serif", "Merriweather", "serif";
 }
 
+@layer base {
+  h1 {
+    font-size: 56px;
+    @apply font-serif;
+  }
+  h2 {
+    font-size: 45px;
+    @apply font-serif;
+  }
+  h3 {
+    font-size: 35px;
+    @apply font-serif;
+  }
+  h4 {
+    font-size: 27px;
+    @apply font-serif;
+  }
+  h5 {
+    @apply font-sans;
+    font-size: 21px;
+  }
+  h6 {
+    @apply font-sans;
+    font-size: 16px;
+  }
+  p {
+    @apply font-sans font-medium text-lg;
+    line-height: 1.2rem;
+  }
+  small {
+    font-size: 13.4px;
+    @apply font-sans;
+  }
+}
+
 /* SIGN IN SECTION */
 .signIn {
   width: 30%;
@@ -23,6 +58,8 @@ body {
   width: 30%;
   margin-bottom: 50px;
 }
+
+
 
 @media only screen and (max-width: 768px) {
   .signIn,
