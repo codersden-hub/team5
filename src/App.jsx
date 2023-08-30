@@ -1,17 +1,19 @@
-import './App.css'
-import SignUp from './components/SignUp/SignUp';
-import CreateAccount from './components/SignUp/CreateAccount';
-import {Routes, Route} from 'react-router-dom';
+import "./App.css";
+import SignUp from "./components/SignUp/SignUp";
+import CreateAccount from "./components/SignUp/CreateAccount";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/header/header";
 
 const App = () => {
   return (
     <>
+      <Header />
       <Routes>
-        <Route path='/' element={<SignUp />} />
-        <Route path='/createaccount' element={<CreateAccount/>}/>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/createaccount" element={<CreateAccount />} />
       </Routes>
     </>
   );
-}
+};
 
 export default App;
