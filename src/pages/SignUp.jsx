@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../components/context";
 
 const SignUp = () => {
   const { message, signIn, setEmail, setPassword, email, password } = useGlobalContext();
