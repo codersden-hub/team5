@@ -1,16 +1,18 @@
 import "./App.css";
-import SignUp from "./components/SignUp/SignUp";
-import CreateAccount from "./components/SignUp/CreateAccount";
+import SignUp from "./pages/SignUp";
+import CreateAccount from "./pages/CreateAccount";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/header/header";
 
 const App = () => {
   return (
     <>
-      <Header />
+      <Navbar />
       <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="/createaccount" element={<CreateAccount />} />
+          <Route path="/" element={<Home />}/>
+          <Route path="/signin" element={<SignUp />} />
+          <Route path="/createaccount" element={<CreateAccount />} />
       </Routes>
     </>
   );

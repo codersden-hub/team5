@@ -25,16 +25,6 @@ body {
     font-size: 35px;
     @apply font-serif;
     /* SIGN IN SECTION */
-    .signIn {
-      width: 30%;
-      border: 2px solid black;
-      border-radius: 10px;
-      padding: 20px;
-    }
-    .createAccount {
-      width: 30%;
-      margin-bottom: 50px;
-    }
   }
   h4 {
     font-size: 27px;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import Backdrop from "../../UI/Backdrop/Backdrop";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
   // Dynamic Class To Add Animation To DropDown...
@@ -210,23 +210,23 @@ const Navbar = () => {
             </a>
           </div>
           <div className=" w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
-          <a
-            href="#login"
+          <span
+            // href="#login"
             className="m-2 p-main-text"
             onClick={() => setToggleuser(!toogleUser)}
           >
             <i className="bx bxs-user-circle bx-sm text-border-light dark:text-border-dark   cursor-pointer hover:text-hover-light  dark:hover:text-hover-dark"></i>
-          </a>
+          </span>
         </div>
         <div className={formClass.join(" ")}>
-          <NavLink
-            to="/Login"
+          <Link
+            to="/signin"
             className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"
           >
             Login
-          </NavLink>
+          </Link>
           <NavLink
-            to="/Register"
+            to="/createaccount"
             className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"
           >
             Sign up

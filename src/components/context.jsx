@@ -20,6 +20,11 @@ export const ContextApp = ({children}) => {
     const [newPassword, setNewPassword] = useState("");
     const [name, setName] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [count, setCount] = useState(0);
+
+    const increase = () => {
+      setCount(count += 1);
+    }
 
     const navigate = useNavigate();
 
@@ -73,6 +78,10 @@ export const ContextApp = ({children}) => {
           alert(errorCode);
         });
     };
+
+    
+
+
     return (
       <AppContext.Provider
         value={{
@@ -95,6 +104,8 @@ export const ContextApp = ({children}) => {
           confirmNewPassword,
           setConfirmNewPassword,
           emailValidMessage,
+          count,
+          increase
         }}
       >
         {children}
@@ -105,4 +116,5 @@ export const ContextApp = ({children}) => {
 export const useGlobalContext = () => {
   return useContext(AppContext);
 };
+
 
