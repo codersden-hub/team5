@@ -20,11 +20,6 @@ export const ContextApp = ({children}) => {
     const [newPassword, setNewPassword] = useState("");
     const [name, setName] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
-    const [count, setCount] = useState(0);
-
-    const increase = () => {
-      setCount(count += 1);
-    }
 
     const navigate = useNavigate();
 
@@ -36,6 +31,10 @@ export const ContextApp = ({children}) => {
         setEmailValidMessage("Great!!");
       } else {
         setEmailValidMessage("Please, enter valid Email!");
+      }
+      if (!confirmNewPassword || confirmNewPassword !== newPassword) {
+        alert("confirm password should equal password");
+        return;
       }
       createUserWithEmailAndPassword(auth, newEmail, newPassword)
         .then((userCredential) => {
@@ -104,8 +103,6 @@ export const ContextApp = ({children}) => {
           confirmNewPassword,
           setConfirmNewPassword,
           emailValidMessage,
-          count,
-          increase
         }}
       >
         {children}
