@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import Backdrop from "../../UI/Backdrop/Backdrop";
-import { NavLink, Link } from "react-router-dom";
+import Backdrop from "../../UI/Backdrop/Backdrop";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   // Dynamic Class To Add Animation To DropDown...
@@ -36,6 +36,11 @@ const Navbar = () => {
   // JSX Codes Here
   return (
     <>
+      <Backdrop show={toogleUser} clicked={() => setToggleuser(!toogleUser)} />
+      <Backdrop
+        show={toogleCategory}
+        clicked={() => setToogleCategory(!toogleCategory)}
+      />
       <nav className="w-full top-0 flex justify-between items-center bg-light-body dark:bg-dark-body py-4 p-8 md:pr-4 z-[999999]">
         {/* Small Screen Navigation Start Here */}
         <div className="flex cursor-pointer ">
@@ -89,17 +94,17 @@ const Navbar = () => {
         {/* DeskTop Screen Sizes */}
         <ul className="hidden min-w-[500px] md:min-w-[300px] list-none md:flex flex-1 justify-center items-center">
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
-            <a href="#home">Home</a>
+            <a href="/">Home</a>
           </li>
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
-            <a
-              href="#home"
+            <NavLink
+              to="/"
               className="flex items-center justify-center"
               onClick={() => setToogleCategory(!toogleCategory)}
             >
               Category
               <i className="bx bx-chevron-down bx-sm"></i>
-            </a>
+            </NavLink>
           </li>
 
           {/* Category DropDown Gives Me Tomuch Stress Make I Go Sleep Small  */}
@@ -200,13 +205,13 @@ const Navbar = () => {
           <div className="hidden w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
           <div className="flex items-center justify-center">
             <a href="#facebook" className=" m-2 p-main-text">
-              <i className="bx bxl-facebook-circle bx-sm text-border-light dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
+              <i className="bx bxl-github bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
             </a>
             <a href="#twitter" className=" m-2 p-main-text">
-              <i className="bx bxl-twitter bx-sm text-border-light dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
+              <i className="bx bxl-twitter bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
             </a>
             <a href="#instagram" className=" m-2 p-main-text">
-              <i className="bx bxl-instagram bx-sm text-border-light dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
+              <i className="bx bxl-instagram bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
             </a>
           </div>
           <div className=" w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
@@ -215,16 +220,16 @@ const Navbar = () => {
             className="m-2 p-main-text"
             onClick={() => setToggleuser(!toogleUser)}
           >
-            <i className="bx bxs-user-circle bx-sm text-border-light dark:text-border-dark   cursor-pointer hover:text-hover-light  dark:hover:text-hover-dark"></i>
+            <i className="bx bxs-user-circle bx-sm text-light-header dark:text-border-dark   cursor-pointer hover:text-hover-light  dark:hover:text-hover-dark"></i>
           </span>
         </div>
         <div className={formClass.join(" ")}>
-          <Link
+          <NavLink
             to="/signin"
             className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"
           >
             Login
-          </Link>
+          </NavLink>
           <NavLink
             to="/createaccount"
             className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"

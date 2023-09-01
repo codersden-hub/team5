@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from '../components/context';
+import { useGlobalContext } from "../components/context";
 
 function CreateAccount() {
-    const {
-      newEmail,
-      setNewEmail,
-      newPassword,
-      setNewPassword,
-      name,
-      setName,
-      confirmNewPassword,
-      setConfirmNewPassword,
-      createAccount,
-      emailValidMessage,
-    } = useGlobalContext();
+  const {
+    newEmail,
+    setNewEmail,
+    newPassword,
+    setNewPassword,
+    name,
+    setName,
+    confirmNewPassword,
+    setConfirmNewPassword,
+    createAccount,
+    emailValidMessage,
+  } = useGlobalContext();
   return (
-    <div className="flex flex-col items-center mb-5">
-      <div className="signIn mt-4 bg-white">
+    <div className="flex flex-col items-center bg-light-body dark:bg-dark-body ">
+      <div className="signIn mt-4 bg-white mb-7">
         <h2 className="font-bold pb-3"> Create Account</h2>
         <div className="form">
           <h5>Email</h5>
@@ -79,20 +79,19 @@ function CreateAccount() {
           />
         </div>
         <button
-          className="w-full text-light-text bg-head-blue p-2 round my-4"
+          className="w-full text-light-text dark:text-dark-text bg-head-blue p-2 round my-4"
           onClick={() => createAccount()}
         >
           CREATE ACCOUNT
         </button>
         <hr />
-        <p>
+        <p className="text-center">
           Already have an account?
           <Link to="/">Sign In</Link>
         </p>
       </div>
     </div>
   );
-
 }
 
-export default CreateAccount
+export default CreateAccount;
