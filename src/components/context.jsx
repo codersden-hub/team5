@@ -20,11 +20,11 @@ export const ContextApp = ({children}) => {
     const [newPassword, setNewPassword] = useState("");
     const [name, setName] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
 
-    const increase = () => {
-      setCount(count += 1);
-    }
+    // const increase = () => {
+    //   setCount(count += 1);
+    // }
 
     const navigate = useNavigate();
 
