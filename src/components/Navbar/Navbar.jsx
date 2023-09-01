@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import images from "../../UI/constants/images";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import { NavLink } from "react-router-dom";
+import Auth from "../Auth/Auth";
+import UserProfile from "../UserProfile/UserProfile";
 
 const Navbar = () => {
   // Dynamic Class To Add Animation To DropDown...
   const [toggleButton, setToggleButton] = useState(false);
   const [toogleUser, setToggleuser] = useState(false);
   const [toogleCategory, setToogleCategory] = useState(false);
+  const [isLoginIn, setIsLogin] = useState(true);
   const smallScreenNavClass = [
     "fixed left-0 w-full bg-light-body dark:bg-dark-body z-10 flex justify-center items-center  flex-col transition-all",
   ];
@@ -15,13 +19,13 @@ const Navbar = () => {
 
   //Hide And Display Login Sign Up Form
   let formClass = [
-    `hidden absolute right-0 md:flex flex-col items-center justify-around
-       text-center min-h-[10rem] p-4 bg-light-body dark:bg-dark-body w-64 transition-transform z-10 shadow-xl`,
+    `hidden absolute right-0 top-0 md:block  min-h-[10rem] bg-light-body dark:bg-dark-body w-64 d-t z-10 shadow-xl pb-6 rounded-md 
+  `,
   ];
   if (toogleUser) {
-    formClass.push("translate-y-28");
+    formClass.push("dropdown-visible");
   } else {
-    formClass.push("-translate-y-36 ");
+    formClass.push("dropdown-hidden");
   }
 
   // Hide And Display Category Drowdown
@@ -32,6 +36,23 @@ const Navbar = () => {
     categoryClass.push("dropdown-visible");
   } else {
     categoryClass.push("dropdown-hidden");
+  }
+
+  let profileImg = (
+    <img
+      className="rounded-full w-10 cursor-pointer"
+      src={images.avatar3}
+      alt=""
+    />
+  );
+  if (isLoginIn) {
+    profileImg = (
+      <img
+        className="rounded-full w-10 cursor-pointer"
+        src={images.profile}
+        alt=""
+      />
+    );
   }
   // JSX Codes Here
   return (
@@ -220,22 +241,11 @@ const Navbar = () => {
             className="m-2 p-main-text"
             onClick={() => setToggleuser(!toogleUser)}
           >
-            <i className="bx bxs-user-circle bx-sm text-light-header dark:text-border-dark   cursor-pointer hover:text-hover-light  dark:hover:text-hover-dark"></i>
+            {profileImg}
           </span>
         </div>
         <div className={formClass.join(" ")}>
-          <NavLink
-            to="/signin"
-            className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/createaccount"
-            className="p-2 w-full bg-hover-dark text-cards-light hover:outline-1 cursor-pointer rounded-md hover:bg-[#5b5be2]"
-          >
-            Sign up
-          </NavLink>
+          {isLoginIn ? <UserProfile /> : <Auth />}
         </div>
       </nav>
     </>

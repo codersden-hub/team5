@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => (
   <>
-    <div className="w-full absolute bottom-0 border-t border-border-dark bg-dark-footer dark:bg-dark-body text-light-body dark:text-dark-text flex flex-col justify-center items-center p-12 gap-8 flex-1 flex-shrink">
+    <div className="w-full border-t border-border-dark bg-dark-footer dark:bg-dark-body text-light-body dark:text-dark-text flex flex-col justify-center items-center p-12 gap-8 flex-1 flex-shrink">
       <NewsLetters />
       <nav className="min-w-full flex justify-between items-center flex-col md:flex-row gap-5 md:gap-0">
         <header className="flex justify-center md:justify-start   text-hover-dark w-1/4">
