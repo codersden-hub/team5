@@ -104,8 +104,6 @@ export const ContextApp = ({children}) => {
           confirmNewPassword,
           setConfirmNewPassword,
           emailValidMessage,
-          count,
-          increase
         }}
       >
         {children}
