@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import images from "../../UI/constants/images";
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import UserProfile from "../UserProfile/UserProfile";
 
@@ -19,18 +19,18 @@ const Navbar = () => {
 
   //Hide And Display Login Sign Up Form
   let formClass = [
-    `hidden absolute right-0 top-0 md:block  min-h-[10rem] bg-light-body dark:bg-dark-body w-64 d-t z-10 shadow-xl pb-6 rounded-md 
+    `hidden absolute right-4 top-0 md:block  min-h-[10rem] bg-light-body dark:bg-dark-body w-64 d-t z-10 shadow-sm pb-1 rounded-xl dark:shadow-cards-light
   `,
   ];
   if (toogleUser) {
     formClass.push("dropdown-visible");
   } else {
-    formClass.push("dropdown-hidden");
+    formClass.push("invisible");
   }
 
   // Hide And Display Category Drowdown
   let categoryClass = [
-    `md:block absolute d-t bg-light-body dark:bg-dark-body min-h-[400px] pb-6 w-60 rounded-e-md shadow-xl`,
+    `md:block absolute d-t bg-light-body dark:bg-dark-body min-h-[400px] pb-6 w-60 rounded-e-md shadow-sm dark:shadow-cards-light`,
   ];
   if (toogleCategory) {
     categoryClass.push("dropdown-visible");
@@ -217,23 +217,32 @@ const Navbar = () => {
           </h1>
         </header>
         <div className="hidden md:flex items-center justify-end">
-          <a
-            href="#join"
+          <Link
+            to="https://docs.google.com/forms/d/e/1FAIpQLSfahFvHiyZ-og2lY-GyJzTlNq5EW-ajR5mm7PFL4zM4XBolug/viewform"
             className="hidden mx-4 no-underline transition-all: hover:text-hover-light dark:hover:text-hover-dark p-main-text lg:block"
           >
             Join Community
-          </a>
+          </Link>
           <div className="hidden w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
           <div className="flex items-center justify-center">
-            <a href="#facebook" className=" m-2 p-main-text">
-              <i className="bx bxl-github bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
-            </a>
-            <a href="#twitter" className=" m-2 p-main-text">
+            <Link
+              to="https://www.linkedin.com/company/coder-s-den-94/"
+              className=" m-2 p-main-text"
+            >
+              <i className="bx bxl-linkedin-square bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
+            </Link>
+            <Link
+              to="https://twitter.com/CodersDen94"
+              className=" m-2 p-main-text"
+            >
               <i className="bx bxl-twitter bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
-            </a>
-            <a href="#instagram" className=" m-2 p-main-text">
-              <i className="bx bxl-instagram bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
-            </a>
+            </Link>
+            <Link
+              to="https://m.youtube.com/channel/UCSaPpb0ORIIlGDT8Tieq0Iw"
+              className=" m-2 p-main-text"
+            >
+              <i className="bx bxl-youtube bx-sm text-light-header dark:text-border-dark  cursor-pointer hover:text-hover-light dark:hover:text-hover-dark"></i>
+            </Link>
           </div>
           <div className=" w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
           <span
