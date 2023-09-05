@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 import app from "../firebase";
 import validator from "validator";
+import { db } from "../firebase";
+import { collection, getDoc } from "firebase/firestore";
 
 const AppContext = React.createContext();
 
@@ -23,7 +25,7 @@ export const ContextApp = ({ children }) => {
   const [count, setCount] = useState(0);
 
   const increase = () => {
-    setCount((count) => count + 1);
+    setCount((count += 1));
   };
 
   const navigate = useNavigate();
