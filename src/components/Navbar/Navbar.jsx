@@ -51,7 +51,7 @@ const Navbar = () => {
     profileImg = (
       <img
         className="rounded-full w-10 cursor-pointer"
-        src={images.profile}
+        src={images.avatar1}
         alt=""
       />
     );

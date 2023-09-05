@@ -15,14 +15,14 @@ const Admin = () => {
 
         <img
           className="rounded-full w-16 absolute left-0 right-0 m-auto top-20 ring-4 ring-light-body"
-          src={images.profile}
+          src={images.avatar2}
           alt=""
         />
         <div className="flex flex-col justify-center items-center mt-12 font-medium font-sans dark:text-dark-text">
           <p className="text-sm">doyourbestpls@gmail.com</p>
           <h6 className="mt-2 font-serif text-3xl">James Israel</h6>
           <Link
-            to="/"
+            to="/admin/jamesisrael/new-post"
             className="capitalize text-xs text-hover-dark mt-2 cursor-pointer flex items-center gap-1 dark:text-light-body dark:hover:text-border-light "
           >
             <i className="bx bxs-edit bx-sm"></i> Write Code

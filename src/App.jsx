@@ -7,6 +7,7 @@ import AdminProfile from "./pages/profiles/AdminProfile";
 import UserProfile from "./pages/profiles/UserProfile";
 import Footer from "./components/footer/footer";
 import { Routes, Route } from "react-router-dom";
+import CreateArticle from "./components/articlesPage/createPost";
 
 const App = () => {
   return (
@@ -18,6 +19,10 @@ const App = () => {
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/admin/jamesisrael" element={<AdminProfile />}></Route>
         <Route path="/jamesisrael" element={<UserProfile />}></Route>
+        <Route
+          path="/admin/jamesisrael/new-post"
+          element={<CreateArticle />}
+        ></Route>
       </Routes>
       <Footer />
     </>

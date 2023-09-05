@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -22,13 +22,22 @@ export const ContextApp = ({ children }) => {
   const [newPassword, setNewPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [count, setCount] = useState(0);
-
-  const increase = () => {
-    setCount((count += 1));
-  };
+  const [admin, setAdmin] = useState();
 
   const navigate = useNavigate();
+
+  const userCollection = collection(db, "Users");
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const data = await getDoc(userCollection);
+  //     let userAdmin = data.docs.map((item) => {
+  //       return { ...item.data(), id: item.id };
+  //     });
+  //     setAdmin(userAdmin);
+  //   };
+  //   getUser();
+  // }, []);
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
@@ -38,6 +47,14 @@ export const ContextApp = ({ children }) => {
       setEmailValidMessage("Great!!");
     } else {
       setEmailValidMessage("Please, enter valid Email!");
+    }
+    if (!name) {
+      alert("Please put a Name");
+      return;
+    }
+    if (!confirmNewPassword || confirmNewPassword !== newPassword) {
+      alert("confirm password should equal password");
+      return;
     }
     createUserWithEmailAndPassword(auth, newEmail, newPassword)
       .then((userCredential) => {
@@ -69,7 +86,7 @@ export const ContextApp = ({ children }) => {
         const user = userCredential.user;
         if (user) {
           setUser(user);
-          // navigate("/");
+          navigate("/");
           setTimeout(() => {
             alert("Success");
           }, 500);
@@ -103,8 +120,6 @@ export const ContextApp = ({ children }) => {
         confirmNewPassword,
         setConfirmNewPassword,
         emailValidMessage,
-        count,
-        increase,
       }}
     >
       {children}
