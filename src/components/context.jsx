@@ -8,7 +8,7 @@ import {
 import app from "../firebase";
 import validator from "validator";
 import { db } from "../firebase";
-import {collection, getDoc} from "firebase/firestore";
+import {collection, getDocs} from "firebase/firestore";
 
 const AppContext = React.createContext();
 
@@ -30,7 +30,7 @@ export const ContextApp = ({children}) => {
 
     useEffect(() => {
       const getUser = async() => {
-        const data = await getDoc(userCollection);
+        const data = await getDocs(userCollection);
         let userAdmin = data.docs.map((item) => {
          return {...item.data(), id: item.id}
         })
