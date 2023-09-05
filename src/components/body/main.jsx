@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { articles } from '../../UI/constants/data';
-import { Link, useNavigate } from 'react-router-dom';
 import HeaderAndFilter from './Header';
-import ArticlePost from '../../pages/singlePage';
 
 const Main = () => {
     const [article, setArticle] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('Latest Articles');
-    const navigate = useNavigate();
 
     useEffect(() => {
-        setArticle(Object.values(articles));
+        setArticle(articles);
     }, []);
 
     const showSeeAllLink = article.length > 3 * 3;
@@ -19,11 +17,7 @@ const Main = () => {
     const filteredArticles = articlesToDisplay.filter((article) => {
         return selectedCategory === 'Latest Articles' || article.category === selectedCategory;
     });
-    const categories = ['Latest Articles', 'Javascript', 'Design', 'Algorithms', 'UI/UX', 'Security']; // Add categories here
-    
-    const handleCardClick = (articleId) => {
-        navigate(`/ArticlePost/${articleId}`);
-    };
+    const categories = ['Latest Articles', 'Javascript', 'Design', 'Algorithms', 'UI/UX', 'Security'];
 
     return (
         <>
@@ -39,7 +33,7 @@ const Main = () => {
                     </div>
                 ) : (
                     filteredArticles.map((article, index) => (
-                        <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md" onClick={() => handleCardClick(article.id)}>
+                        <Link to={`/ArticlePost/${article.id}`} key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
                             <img src={article.thumbnail} alt="Banner" className="w-full h-40 object-cover" />                                      
                             <div className="p-4">
                                 <p className="text-sm text-gray-500">Author: {article.author}</p><br/>
@@ -47,7 +41,7 @@ const Main = () => {
                                 <p className="text-sm text-gray-500">{article.category}</p><br/>  
                                 <p className="text-gray-600">{article.minContent}</p>              
                             </div> 
-                        </div>
+                        </Link>
                     ))
                 )}
                 {showSeeAllLink && (
@@ -59,4 +53,5 @@ const Main = () => {
         </>  
     );          
 };
-export default Main;   
+
+export default Main;
