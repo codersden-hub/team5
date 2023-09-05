@@ -8,7 +8,7 @@ const User = () => {
         <div className="p-0 h-28 bg-light-footer rounded-t-xl" />
         <img
           className="rounded-full w-16 absolute left-0 right-0 m-auto top-20 ring-4 ring-light-body"
-          src={images.avatar5}
+          src={images.avatar}
           alt=""
         />
         <div className="flex flex-col justify-center items-center mt-12 font-medium font-sans dark:text-dark-text">
