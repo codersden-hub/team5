@@ -3,7 +3,8 @@ import images from "../../UI/constants/images";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import { NavLink, Link } from "react-router-dom";
 import Auth from "../Auth/Auth";
-import UserProfile from "../UserProfile/UserProfile";
+import Admin from "../dashboard/admin/Admin";
+import User from "../dashboard/user/User";
 
 const Navbar = () => {
   // Dynamic Class To Add Animation To DropDown...
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [toogleUser, setToggleuser] = useState(false);
   const [toogleCategory, setToogleCategory] = useState(false);
   const [isLoginIn, setIsLogin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(true);
   const smallScreenNavClass = [
     "fixed left-0 w-full bg-light-body dark:bg-dark-body z-10 flex justify-center items-center  flex-col transition-all",
   ];
@@ -118,14 +120,14 @@ const Navbar = () => {
             <a href="/">Home</a>
           </li>
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
-            <NavLink
+            <Link
               to="/"
               className="flex items-center justify-center"
               onClick={() => setToogleCategory(!toogleCategory)}
             >
               Category
               <i className="bx bx-chevron-down bx-sm"></i>
-            </NavLink>
+            </Link>
           </li>
 
           {/* Category DropDown Gives Me Tomuch Stress Make I Go Sleep Small  */}
@@ -254,7 +256,7 @@ const Navbar = () => {
           </span>
         </div>
         <div className={formClass.join(" ")}>
-          {isLoginIn ? <UserProfile /> : <Auth />}
+          {isLoginIn ? isAdmin ? <Admin /> : <User /> : <Auth />}
         </div>
       </nav>
     </>
