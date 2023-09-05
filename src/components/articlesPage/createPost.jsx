@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import ArticleForm from './articleForm';
+import React, { useState } from "react";
+import ArticleForm from "./articleForm";
 
 const CreateArticle = () => {
-
   const handleSubmit = (articleData) => {
     console.log(articleData);
   };
 
   return (
-    <div>
+    <div className="w-full h-screen bg-light-body dark:text-dark-text pt-24 dark:bg-dark-body">
       <ArticleForm onSubmit={handleSubmit} />
     </div>
   );
