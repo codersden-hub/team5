@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import HeroSlide from "../Hero/Hero";
 import { articles } from "../../UI/constants/data";
 
-const Carousel = ({ autoSlide, duration }) => {
+const Carousel = React.memo(({ autoSlide, duration }) => {
   const [activeSlide, setActiveSlide] = useState(0);
-  console.log(articles);
+
   useEffect(() => {
     if (!autoSlide) return;
     const slideInterval = setInterval(() => {
@@ -37,6 +37,6 @@ const Carousel = ({ autoSlide, duration }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Carousel;

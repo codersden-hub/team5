@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../components/context";
 
 const SignUp = () => {
-  const { message, signIn, setEmail, setPassword, email, password } = useGlobalContext();
+  const { message, signIn, setEmail, setPassword, email, password } =
+    useGlobalContext();
 
   // SIGN IN FUNCTION OF EXISTING USERS
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-light-body dark:bg-dark-body">
       <div className="signIn mt-4 bg-white">
         <h2 className="font-bold pb-3">Sign In</h2>
         <div className="form">

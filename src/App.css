@@ -102,11 +102,13 @@ a {
 /* SIGN IN SECTION */
 .signIn {
   width: 30%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 10px;
   padding: 20px;
+  @apply text-light-text dark:text-dark-text outline-none border border-border-light dark:border-border-dark;
 }
 .createAccount {
+  @apply text-light-text dark:text-dark-text;
   width: 30%;
   margin-bottom: 50px;
 }
