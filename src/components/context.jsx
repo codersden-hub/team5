@@ -8,11 +8,7 @@ import {
 import app from "../firebase";
 import validator from "validator";
 import { db } from "../firebase";
-<<<<<<< HEAD
 import {collection, getDocs} from "firebase/firestore";
-=======
-import { collection, getDoc } from "firebase/firestore";
->>>>>>> upstream/dev
 
 const AppContext = React.createContext();
 
