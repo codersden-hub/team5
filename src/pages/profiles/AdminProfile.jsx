@@ -39,10 +39,14 @@ const AdminProfile = () => {
             </div>
             <div className="w-full flex justify-between items-center p-2">
               <div className="flex gap-3 items-center justify-center">
-                <i className="bx bx-heart -tracking-widest">400</i>
-                <i className="bx bx-message-rounded-dots -tracking-widest">
+                <span className="">
+                  <i className="bx bx-heart"></i>
+                  400
+                </span>
+                <span className="">
+                  <i className="bx bx-message-rounded-dots"></i>
                   100
-                </i>
+                </span>
               </div>
               <div className="flex gap-3 items-center justify-center">
                 <i className="bx bx-edit-alt text-hover-dark"></i>
