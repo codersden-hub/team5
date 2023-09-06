@@ -10,6 +10,7 @@
 
 body {
   font-family: "Inconsolata", "sans-serif", "Merriweather", "serif";
+  @apply bg-light-body;
 }
 
 @layer base {

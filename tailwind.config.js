@@ -5,7 +5,7 @@ module.exports = {
     colors: {
       "cards-light": "#ffffff",
       "light-header": "#302d2d",
-      "light-body": "#f5f4f0",
+      "light-body": "#F5F4F0",
       "light-footer": "#2b2b43",
       "light-text": "#1d1e38",
       "hover-light": "#990062",

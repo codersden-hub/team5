@@ -30,12 +30,14 @@ export const ContextApp = ({ children }) => {
 
   const userCollection = collection(db, "Users");
 
-   const addUser = async (user) => {
+
+   const addUser = async (user, id) => {
     
      await addDoc(userCollection, {
-       userName: name,
-       userEmail: user,
-       role: ["user"],
+        userId: id,
+        userName: name,
+        userEmail: user,
+        role: ["user"],
      });
    };
 
@@ -49,12 +51,12 @@ export const ContextApp = ({ children }) => {
     let user = localStorage.getItem("user");
     user? setIsLogin(true) : setIsLogin(false);
     for (const i of userAdmin) {
-      if(i.userEmail === user) {
+      if(i.userId === user) {
         setEmail(i.userEmail);
         setName(i.userName);
       }
 
-      if ( i.userEmail === user && i.role[1]) {
+      if ( i.userId === user && i.role[1]) {
         setIsAdmin(true);
         break;
       }
@@ -93,7 +95,7 @@ export const ContextApp = ({ children }) => {
           setTimeout(() => {
             alert("Success, now you can Log in");
           }, 500);
-          addUser(user.email);
+          addUser(user.email, user.uid);
         }
       })
       .catch((error) => {
@@ -112,10 +114,11 @@ export const ContextApp = ({ children }) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log(user);
       if (user) {
         localStorage.setItem(
           "user",
-          user.email
+          user.uid
         );
         navigate("/");
         setTimeout(() => {

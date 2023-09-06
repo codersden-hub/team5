@@ -6,6 +6,8 @@ export const articles = [
     category: "Tech",
     author: "James Israel",
     datePosted: new Date(),
+    likes: 1,
+    comments: [],
     headLine: "The Future of Artificial Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
