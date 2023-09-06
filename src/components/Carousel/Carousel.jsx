@@ -4,11 +4,7 @@ import { articles } from "../../UI/constants/data";
 
 const Carousel = React.memo(({ autoSlide, duration }) => {
   const [activeSlide, setActiveSlide] = useState(0);
-<<<<<<< HEAD
   //console.log(articles);
-=======
-
->>>>>>> 17ccb0e8a80889fb6c8a17d2eb5a452ea60ec10a
   useEffect(() => {
     if (!autoSlide) return;
     const slideInterval = setInterval(() => {
