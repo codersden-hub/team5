@@ -25,6 +25,7 @@ function CreateAccount() {
             type="email"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
+            className="text-light-text"
             style={{
               width: "100%",
               padding: "5px",
@@ -46,6 +47,7 @@ function CreateAccount() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="text-light-text"
             style={{
               width: "100%",
               padding: "5px",
@@ -58,6 +60,7 @@ function CreateAccount() {
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            className="text-light-text"
             style={{
               width: "100%",
               padding: "5px",
@@ -70,6 +73,7 @@ function CreateAccount() {
             type="password"
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
+            className="text-light-text"
             style={{
               width: "100%",
               padding: "5px",

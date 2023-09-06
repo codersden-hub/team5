@@ -5,14 +5,16 @@ import { NavLink, Link } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import Admin from "../dashboard/admin/Admin";
 import User from "../dashboard/user/User";
+import { useGlobalContext } from "../context";
 
 const Navbar = () => {
   // Dynamic Class To Add Animation To DropDown...
   const [toggleButton, setToggleButton] = useState(false);
   const [toogleUser, setToggleuser] = useState(false);
   const [toogleCategory, setToogleCategory] = useState(false);
-  const [isLoginIn, setIsLogin] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const {isLoginIn, isAdmin} = useGlobalContext();
+
+
   const smallScreenNavClass = [
     "fixed left-0 w-full bg-light-body dark:bg-dark-body z-10 flex justify-center items-center  flex-col transition-all",
   ];
@@ -88,7 +90,9 @@ const Navbar = () => {
             </a>
             <ul className="list-none">
               <li className="p-main-text m-10 cursor-pointer text-light-header dark:text-dark-header text-2xl text-center font-serif transition-all hover:text-hover-light dark:hover:text-hover-dark hover:transition-all">
-                <a href="#home">Home</a>
+                <Link to="/" onClick={() => setToggleButton(!toggleButton)}>
+                  Home
+                </Link>
               </li>
               <li className="p-main-text m-10 cursor-pointer text-light-header  dark:text-dark-header text-2xl text-center font-serif transition-all hover:text-hover-light dark:hover:text-hover-dark hover:transition-all">
                 <a href="#home">Category</a>

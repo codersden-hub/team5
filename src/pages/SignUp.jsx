@@ -17,7 +17,7 @@ const SignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border-2"
+            className="border-2 text-light-text"
             style={{
               width: "100%",
               padding: "5px",
@@ -40,6 +40,7 @@ const SignUp = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="text-light-text"
             style={{
               width: "100%",
               padding: "5px",

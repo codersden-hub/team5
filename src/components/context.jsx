@@ -8,12 +8,12 @@ import {
 import app from "../firebase";
 import validator from "validator";
 import { db } from "../firebase";
-import { collection, getDoc } from "firebase/firestore";
+import {addDoc, collection, getDocs} from "firebase/firestore";
 
 const AppContext = React.createContext();
 
 export const ContextApp = ({ children }) => {
-  const [user, setUser] = useState();
+  // const [currentUser, setCurrentUser] = useState();
   const [message, setMessage] = useState("");
   const [emailValidMessage, setEmailValidMessage] = useState("");
   const [email, setEmail] = useState("");
@@ -22,22 +22,50 @@ export const ContextApp = ({ children }) => {
   const [newPassword, setNewPassword] = useState("");
   const [name, setName] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [admin, setAdmin] = useState();
+  // const [adminDetail, setAdminDetail] = useState();
+  const [isLoginIn, setIsLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
 
   const userCollection = collection(db, "Users");
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const data = await getDoc(userCollection);
-  //     let userAdmin = data.docs.map((item) => {
-  //       return { ...item.data(), id: item.id };
-  //     });
-  //     setAdmin(userAdmin);
-  //   };
-  //   getUser();
-  // }, []);
+   const addUser = async (user) => {
+    
+     await addDoc(userCollection, {
+       userName: name,
+       userEmail: user,
+       role: ["user"],
+     });
+   };
+
+  const getUser = async() => {
+    setIsAdmin(false);
+    const data = await getDocs(userCollection);
+    let userAdmin = data.docs.map((item) => {
+     return {...item.data(), id: item.id}
+    })
+    // setAdminDetail(userAdmin);
+    let user = localStorage.getItem("user");
+    user? setIsLogin(true) : setIsLogin(false);
+    for (const i of userAdmin) {
+      if(i.userEmail === user) {
+        setEmail(i.userEmail);
+        setName(i.userName);
+      }
+
+      if ( i.userEmail === user && i.role[1]) {
+        setIsAdmin(true);
+        break;
+      }
+    }
+    
+  }
+  useEffect(() => {
+    getUser();
+  }, [])
+
+ 
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
@@ -61,11 +89,11 @@ export const ContextApp = ({ children }) => {
         // Signed in
         const user = userCredential.user;
         if (user) {
-          setUser(user);
-          navigate("/");
+          navigate("/signin");
           setTimeout(() => {
-            alert("Success");
+            alert("Success, now you can Log in");
           }, 500);
+          addUser(user.email);
         }
       })
       .catch((error) => {
@@ -81,16 +109,21 @@ export const ContextApp = ({ children }) => {
       setMessage("Please, enter valid Email!");
     }
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        if (user) {
-          setUser(user);
-          navigate("/");
-          setTimeout(() => {
-            alert("Success");
-          }, 500);
-        }
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      if (user) {
+        localStorage.setItem(
+          "user",
+          user.email
+        );
+        navigate("/");
+        setTimeout(() => {
+          alert("Success");
+        }, 500);
+      }
+      getUser();
+      setPassword("");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -101,8 +134,7 @@ export const ContextApp = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        user,
-        setUser,
+        getUser,
         message,
         setMessage,
         createAccount,
@@ -120,6 +152,9 @@ export const ContextApp = ({ children }) => {
         confirmNewPassword,
         setConfirmNewPassword,
         emailValidMessage,
+        setIsLogin,
+        isLoginIn,
+        isAdmin
       }}
     >
       {children}
