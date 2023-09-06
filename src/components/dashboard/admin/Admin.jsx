@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import images from "../../../UI/constants/images";
+import { useGlobalContext } from "../../context";
 const Admin = () => {
+  const {getUser, name, email, setEmail, setName, setIsLogin} = useGlobalContext()
+
+  const logOut = () => {
+    localStorage.removeItem("user");
+    getUser();
+    setEmail("");
+    setName("");
+    setIsLogin(false)
+  }
   return (
     <>
       <div className="relative">
@@ -19,8 +29,8 @@ const Admin = () => {
           alt=""
         />
         <div className="flex flex-col justify-center items-center mt-12 font-medium font-sans dark:text-dark-text">
-          <p className="text-sm">doyourbestpls@gmail.com</p>
-          <h6 className="mt-2 font-serif text-3xl">James Israel</h6>
+          <p className="text-sm">{email}</p>
+          <h6 className="mt-2 font-serif text-3xl">{name}</h6>
           <Link
             to="/admin/jamesisrael/new-post"
             className="capitalize text-xs text-hover-dark mt-2 cursor-pointer flex items-center gap-1 dark:text-light-body dark:hover:text-border-light "
@@ -81,12 +91,12 @@ const Admin = () => {
           border-t border-t-border-light mt-5"
           >
             <i className="bx bx-log-out bx-sm text-hover-dark"></i>
-            <p
+            <Link to="/signin"
               className="flex-1 self-center pl-1
-            text-sm dark:hover:text-border-light"
+            text-sm dark:hover:text-border-light" onClick={logOut}
             >
               Login Out
-            </p>
+            </Link>
             <i className="bx bx-chevron-right bx-sm"></i>
           </div>
         </div>
