@@ -26,14 +26,14 @@ const Main = () => {
                 selectedCategory={selectedCategory}
                 onCategoryChange={(category) => setSelectedCategory(category)}
             />     
-            <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
                 {filteredArticles.length === 0 ? (
                     <div className="text-center text-gray-500">
                         No articles found for "{selectedCategory}".
                     </div>
                 ) : (
                     filteredArticles.map((article, index) => (
-                        <Link to={`/ArticlePost/${article.id}`} key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                        <Link to={`/ArticlePost/${article.id}`} key={index} className="bg-light-body rounded-lg overflow-hidden">
                             <img src={article.thumbnail} alt="Banner" className="w-full h-40 object-cover" />                                      
                             <div className="p-4">
                                 <p className="text-sm text-gray-500">Author: {article.author}</p><br/>
