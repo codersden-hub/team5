@@ -11,8 +11,8 @@ const Main = () => {
         setArticle(articles);
     }, []);
 
-    const showSeeAllLink = article.length > 3 * 3;
-    const articlesToDisplay = showSeeAllLink ? article.slice(0, 3 * 3) : article;
+    const showSeeAllLink = article.length > 3 * 2;
+    const articlesToDisplay = showSeeAllLink ? article.slice(0, 3 * 2) : article;
 
     const filteredArticles = articlesToDisplay.filter((article) => {
         return selectedCategory === 'Latest Articles' || article.category === selectedCategory;
@@ -44,8 +44,8 @@ const Main = () => {
                         </Link>
                     ))
                 )}
-                {showSeeAllLink && (
-                    <Link to="/catalog" className="mt-4 text-blue-500 hover:underline block text-center">
+                {showSeeAllLink && (                  
+                    <Link to="/catalog" className="text-orange-500 hover:underline text-right mt-4">
                         See All
                     </Link>
                 )}
