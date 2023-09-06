@@ -9,7 +9,7 @@ export const articles = [
     headLine: "The Future of Artificial Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.hero1,
+    thumbnail: images.quote1,
   },
   {
     id: "2",
@@ -19,7 +19,7 @@ export const articles = [
     headLine: "The Future of Development Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.hero3,
+    thumbnail: images.quote2,
   },
   {
     id: "3",
@@ -29,7 +29,7 @@ export const articles = [
     headLine: "The Future of JavaScript Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.hero1,
+    thumbnail: images.quote1,
   },
   {
     id: "4",
@@ -39,7 +39,7 @@ export const articles = [
     headLine: "The Future of Artificial Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.hero1,
+    thumbnail: images.quote2,
   },
   {
     id: "5",
@@ -49,7 +49,7 @@ export const articles = [
     headLine: "The Best Practices For UI/UX Design 2023.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.hero1,
+    thumbnail: images.quote1,
   },
 ];
 
