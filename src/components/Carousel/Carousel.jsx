@@ -4,7 +4,7 @@ import { articles } from "../../UI/constants/data";
 
 const Carousel = React.memo(({ autoSlide, duration }) => {
   const [activeSlide, setActiveSlide] = useState(0);
-
+  //console.log(articles);
   useEffect(() => {
     if (!autoSlide) return;
     const slideInterval = setInterval(() => {
@@ -14,7 +14,7 @@ const Carousel = React.memo(({ autoSlide, duration }) => {
     }, duration);
 
     return () => clearInterval(slideInterval);
-  }, [autoSlide]);
+  }, []);
 
   return (
     <div className="relative overflow-hidden">

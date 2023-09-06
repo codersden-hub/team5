@@ -3,6 +3,7 @@ import ArticleForm from "./articleForm";
 
 const CreateArticle = () => {
   const handleSubmit = (articleData) => {
+    //handle submit buttion action right here!
     console.log(articleData);
   };
 
