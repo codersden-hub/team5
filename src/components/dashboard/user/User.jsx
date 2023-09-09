@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import images from "../../../UI/constants/images";
 import { useGlobalContext } from "../../context";
 const User = () => {
-  const { getUser, name, email, setEmail, setName, setIsLogin } = useGlobalContext();
+  const { getUser, name, email, setEmail, setName, setIsLogin } =
+    useGlobalContext();
 
   const logOut = () => {
     localStorage.removeItem("user");
@@ -31,9 +32,12 @@ const User = () => {
           border-b border-b-border-light"
           >
             <i className="bx bxs-user-detail bx-sm text-hover-dark"></i>
-            <p className="flex-1 self-center pl-1 text-sm dark:hover:text-border-light">
+            <Link
+              to={"/jamesisrael"}
+              className="flex-1 self-center pl-1 text-sm dark:hover:text-border-light"
+            >
               Profile
-            </p>
+            </Link>
             <i className="bx bx-chevron-right bx-sm"></i>
           </div>
           <div className="flex  items-end justify-between w-full py-2 cursor-pointer">
@@ -57,10 +61,11 @@ const User = () => {
           border-t border-t-border-light mt-5"
           >
             <i className="bx bx-log-out bx-sm text-hover-dark"></i>
-            <Link to="/signin"
+            <Link
+              to="/signin"
               className="flex-1 self-center pl-1
             text-sm dark:hover:text-border-light"
-            onClick={logOut}
+              onClick={logOut}
             >
               Login Out
             </Link>

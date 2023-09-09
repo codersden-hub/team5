@@ -4,10 +4,10 @@ import { useGlobalContext } from "../../components/context";
 // import {}
 
 const Article = ({ data, headLine, datePosted, thumbnail }) => {
-  const { setDisplayedPost } = useGlobalContext();
-  localStorage.setItem("post-info", JSON.stringify(data));
+  const { setDisplayedPost, isAdmin } = useGlobalContext();
   const handleClickedArticle = () => {
     setDisplayedPost(data);
+    localStorage.setItem("post-info", JSON.stringify(data));
   };
   return (
     <div
@@ -37,13 +37,33 @@ const Article = ({ data, headLine, datePosted, thumbnail }) => {
             <p>100</p>
           </span>
         </div>
-        <div className="flex gap-3 py-1 px-5 w-20 items-center justify-center">
-          <i className="bx bx-edit-alt text-hover-dark  bx-sm cursor-pointer"></i>
-          <i className="bx bx-trash text-hover-light cursor-pointer  bx-sm"></i>
-        </div>
+        {isAdmin && (
+          <div className="flex gap-3 py-1 px-5 w-20 items-center justify-center">
+            <i className="bx bx-edit-alt text-hover-dark  bx-sm cursor-pointer"></i>
+            <i className="bx bx-trash text-hover-light cursor-pointer  bx-sm"></i>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Article;
+// Article = [{id:1 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:2 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:3 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:4 HeadLine: 'JavaScript',Comment:[{}]]
+
+// Article.map(article =>
+// article = {
+// id:,
+// HeadLine:,
+// Comment:[{},{},{}]
+// }
+
+// {<Article Headline={article.HeadLine} data={article}/>})
+// Article HeadLine ==> JavaScript ==> Comment : [{},{},{}]
+// Article HeadLine ==> Development ==> Comment : [{},{},{}]
+// Article HeadLine ==> Security ==> Comment : [{},{},{}]
+// Article HeadLine ==> DSA ==> Comment : [{},{},{}]
+// Article

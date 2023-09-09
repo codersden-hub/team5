@@ -2,16 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 import images from "../../../UI/constants/images";
 import { useGlobalContext } from "../../context";
-const Admin = () => {
-  const {getUser, name, email, setEmail, setName, setIsLogin} = useGlobalContext()
+const Admin = ({ close }) => {
+  const {
+    getUser,
+    name,
+    email,
+    setEmail,
+    setName,
+    setIsLogin,
+    adminModal,
+    setAdminModal,
+  } = useGlobalContext();
 
   const logOut = () => {
     localStorage.removeItem("user");
     getUser();
     setEmail("");
     setName("");
-    setIsLogin(false)
-  }
+    setIsLogin(false);
+  };
+
+  const displayModal = () => {
+    setAdminModal(!adminModal);
+    close(false);
+  };
   return (
     <>
       <div className="relative">
@@ -45,7 +59,7 @@ const Admin = () => {
           >
             <i className="bx bxs-user-detail bx-sm text-hover-dark"></i>
             <Link
-              to="/admin/jamesisrael"
+              to="/jamesisrael"
               className="flex-1 self-center pl-1 text-sm dark:hover:text-border-light"
             >
               Profile
@@ -72,7 +86,10 @@ const Admin = () => {
           {/* Others */}
           <div className="flex mt-4  items-end justify-between w-full py-2 cursor-pointer border-t border-t-border-light">
             <i className="bx bxs-key bx-sm text-hover-dark"></i>
-            <p className="flex-1 self-center pl-1 text-sm  dark:hover:text-border-light">
+            <p
+              className="flex-1 self-center pl-1 text-sm  dark:hover:text-border-light"
+              onClick={displayModal}
+            >
               Grant Admin Verification
             </p>
             <i className="bx bx-chevron-right bx-sm"></i>
@@ -91,9 +108,11 @@ const Admin = () => {
           border-t border-t-border-light mt-5"
           >
             <i className="bx bx-log-out bx-sm text-hover-dark"></i>
-            <Link to="/signin"
+            <Link
+              to="/signin"
               className="flex-1 self-center pl-1
-            text-sm dark:hover:text-border-light" onClick={logOut}
+            text-sm dark:hover:text-border-light"
+              onClick={logOut}
             >
               Login Out
             </Link>

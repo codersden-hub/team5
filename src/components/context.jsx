@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -25,15 +25,11 @@ export const ContextApp = ({ children }) => {
   // const [adminDetail, setAdminDetail] = useState();
   const [isLoginIn, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [displayedPost, setDisplayedPost] = useState(
-    JSON.parse(localStorage.getItem("post-info"))
-  );
+  const [displayedPost, setDisplayedPost] = useState(null);
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState(null);
-
   const userCollection = collection(db, "Users");
-
+  const [adminModal, setAdminModal] = useState(false);
   const addUser = async (user, id) => {
     await addDoc(userCollection, {
       userId: id,
@@ -158,8 +154,8 @@ export const ContextApp = ({ children }) => {
         setDisplayedPost,
         scroll,
         setScroll,
-        selectedImage,
-        setSelectedImage,
+        adminModal,
+        setAdminModal,
       }}
     >
       {children}
