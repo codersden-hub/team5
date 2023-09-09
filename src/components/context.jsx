@@ -8,7 +8,7 @@ import {
 import app from "../firebase";
 import validator from "validator";
 import { db } from "../firebase";
-import {addDoc, collection, getDocs} from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 const AppContext = React.createContext();
 
@@ -33,39 +33,36 @@ export const ContextApp = ({ children }) => {
   const userCollection = collection(db, "Users");
   const posts = collection(db, "Posts")
 
+  const addUser = async (user, id) => {
+    await addDoc(userCollection, {
+      userId: id,
+      userName: name,
+      userEmail: user,
+      role: ["user"],
+    });
+  };
 
-   const addUser = async (user, id) => {
-    
-     await addDoc(userCollection, {
-        userId: id,
-        userName: name,
-        userEmail: user,
-        role: ["user"],
-     });
-   };
-
-  const getUser = async() => {
+  const getUser = async () => {
     setIsAdmin(false);
     const data = await getDocs(userCollection);
     let userAdmin = data.docs.map((item) => {
-     return {...item.data(), id: item.id}
-    })
+      return { ...item.data(), id: item.id };
+    });
     // setAdminDetail(userAdmin);
     let user = localStorage.getItem("user");
-    user? setIsLogin(true) : setIsLogin(false);
+    user ? setIsLogin(true) : setIsLogin(false);
     for (const i of userAdmin) {
-      if(i.userId === user) {
+      if (i.userId === user) {
         setEmail(i.userEmail);
         setName(i.userName);
       }
 
-      if ( i.userId === user && i.role[1]) {
+      if (i.userId === user && i.role[1]) {
         setIsAdmin(true);
         break;
       }
     }
-    
-  }
+  };
   useEffect(() => {
     getUser();
   }, [])
@@ -187,7 +184,11 @@ export const ContextApp = ({ children }) => {
         addPost,
         articlesData,
         setSelectedImg,
-        selectedImg
+        selectedImg,
+        displayedPost,
+        setDisplayedPost,
+        scroll,
+        setScroll
       }}
     >
       {children}
