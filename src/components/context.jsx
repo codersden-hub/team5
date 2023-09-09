@@ -25,10 +25,13 @@ export const ContextApp = ({ children }) => {
   // const [adminDetail, setAdminDetail] = useState();
   const [isLoginIn, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [articlesData, setArticlesData] =useState([]);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const navigate = useNavigate();
 
   const userCollection = collection(db, "Users");
+  const posts = collection(db, "Posts")
 
 
    const addUser = async (user, id) => {
@@ -65,6 +68,18 @@ export const ContextApp = ({ children }) => {
   }
   useEffect(() => {
     getUser();
+  }, [])
+
+  const getPosts = async () => {
+    const data = await getDocs(posts)
+    let postData = data.docs.map((item) => {
+      return { ...item.data(), id: item.id };
+    });
+   setArticlesData(postData);
+  };
+
+  useEffect(() => {
+    getPosts();
   }, [])
 
  
@@ -114,7 +129,6 @@ export const ContextApp = ({ children }) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(user);
       if (user) {
         localStorage.setItem(
           "user",
@@ -133,6 +147,18 @@ export const ContextApp = ({ children }) => {
         alert(errorCode);
       });
   };
+
+  const addPost = async (articleData) => {
+    await addDoc(posts, {
+      ...articleData,
+      author: name,
+      likes: 0,
+      comments: [],
+      thumbnail: selectedImg,
+    });
+  }
+
+  
 
   return (
     <AppContext.Provider
@@ -157,7 +183,11 @@ export const ContextApp = ({ children }) => {
         emailValidMessage,
         setIsLogin,
         isLoginIn,
-        isAdmin
+        isAdmin,
+        addPost,
+        articlesData,
+        setSelectedImg,
+        selectedImg
       }}
     >
       {children}

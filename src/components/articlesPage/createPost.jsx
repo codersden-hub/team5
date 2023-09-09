@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import ArticleForm from "./articleForm";
+import { useGlobalContext } from "../context";
+
 
 const CreateArticle = () => {
+  const {addPost} = useGlobalContext();
   const handleSubmit = (articleData) => {
     //handle submit buttion action right here!
-    console.log(articleData);
+    addPost(articleData)
   };
 
   return (

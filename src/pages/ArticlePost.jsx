@@ -17,7 +17,7 @@ const ArticlePost = ({ articles }) => {
             <p className="text-sm text-gray-500 mt-2">Author: {articleSelected.author}</p>
             <h2 className="text-2xl font-semibold mt-2">{articleSelected.headLine}</h2>
             <p className="text-sm text-gray-500 mt-2">{articleSelected.category}</p>
-            <div className="mt-4">{articleSelected.content}</div>
+            <div className="mt-4">{articleSelected.minContent}</div>
         </div>
     );
 };

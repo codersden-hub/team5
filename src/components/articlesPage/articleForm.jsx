@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import QuillEditor from "./editor";
 import ArticlePreview from "./preview";
+import UploadImg from "./uploadImg";
 
 const ArticleForm = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [editorHtml, setEditorHtml] = useState("");
   const [category, setCategory] = useState("");
   const [showPreview, setShowPreview] = useState(false);
+  
+  
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -29,6 +32,7 @@ const ArticleForm = ({ onSubmit }) => {
     setShowPreview(!showPreview);
   };
 
+
   const isFormValid = title && editorHtml && category !== "None";
   return (
     <div className="max-w-xl mx-auto p-6 bg-white  rounded-lg shadow-md dark:shadow-cards-light">
@@ -41,8 +45,8 @@ const ArticleForm = ({ onSubmit }) => {
       >
         {showPreview ? (
           <ArticlePreview
-            title={title}
-            content={editorHtml}
+            headLine={title}
+            minContent={editorHtml}
             category={category}
           />
         ) : (
@@ -57,6 +61,7 @@ const ArticleForm = ({ onSubmit }) => {
                 dark:text-dark-text  focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body"
               />
             </div>
+            <UploadImg/>
             <div className="mb-4">
               <QuillEditor
                 value={editorHtml}
