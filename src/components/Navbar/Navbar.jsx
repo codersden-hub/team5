@@ -213,7 +213,7 @@ const Navbar = () => {
           </div>
 
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
-            <a href="#home">About</a>
+            <Link to="/about">About</Link>
           </li>
         </ul>
         <header className="flex justify-end md:flex-1 md:justify-normal  text-hover-dark">

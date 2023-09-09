@@ -82,5 +82,3 @@ export const articles = [
     thumbnail: images.quote2,
   },
 ];
-
-// export articles;
