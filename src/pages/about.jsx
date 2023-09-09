@@ -36,7 +36,7 @@ const About = () => {
         <div className="text-center mt-8 font-sans">
           <Link
             to="/join-community"
-            className="px-6 py-2 bg-hover-dark text-dark-text hover:bg-[blue] rounded-lg cursor-pointer transition-colors duration-300"
+            className="px-6 py-2 bg-hover-dark text-dark-text hover:bg-[blue-400] rounded-lg cursor-pointer transition-colors duration-300"
           >
             Join Our Community
           </Link>
