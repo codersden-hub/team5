@@ -60,18 +60,21 @@ import React, { useState, useEffect } from 'react';
 import { mockData } from './mock';
 
 const HeaderAndFilter = ({ categories, onCategoryChange }) => {
-    const defaultCategory = 'Latest Articles';
-    const [searchCategory, setSearchCategory] = useState(defaultCategory);
-    const [recentCategories, setRecentCategories] = useState([]); // Use state to hold recentCategories.
+    //const defaultCategory = 'Latest Articles';
+    console.log(categories)
+    const [searchCategory, setSearchCategory] = useState('');
+    const [recentCategories, setRecentCategories] = useState([]);
 
     useEffect(() => {
-        const categoryTimestamps = {};
+        const categoryTimestamps = [];
 
         categories.forEach((category) => {
-            const articlesInCategory = mockData.filter((article) => article.category.toLowerCase() === category.toLowerCase());
+            const articlesInCategory = mockData.filter((article) => article.category
+            .toLowerCase() === category.toLowerCase());
 
             if (articlesInCategory.length > 0) {
-                const mostRecentTimestamp = Math.max(...articlesInCategory.map((article) => article.timestamp));
+                const mostRecentTimestamp = Math.max(...articlesInCategory
+                    .map((article) => article.timestamp));
                 categoryTimestamps[category] = mostRecentTimestamp;
             }
         });
@@ -83,7 +86,7 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
         // Use setRecentCategories to update the state with the sorted categories.
         setRecentCategories(sortedCategories.slice(0, 3));
 
-        setSearchCategory(defaultCategory);
+        setSearchCategory([]);
     }, [categories]);
 
     const handleCategoryChange = (category) => {
@@ -92,7 +95,7 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
     };
 
     return (
-        <div className="flex items-center justify-between m-10 mb-8">
+        <div className="flex flex-col gap-4 md:flex-row font-sans items-center justify-between m-10 mb-8">
             <h1 className="text-3xl font-semibold">Latest Articles</h1>
             <div className="flex items-center">
                 {recentCategories.map((category, index) => (

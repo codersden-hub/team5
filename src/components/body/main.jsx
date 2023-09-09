@@ -35,7 +35,7 @@ const Main = () => {
     if (text.length <= maxLength) {
       return text;
     }
-    return text.slice(0, maxLength)+'...';
+    return text.slice(0, maxLength)+'.';
   };
 
   return (
@@ -45,23 +45,23 @@ const Main = () => {
         selectedCategory={selectedCategory}
         onCategoryChange={(category) => setSelectedCategory(category)}
       />
-      <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredArticles.length === 0 ? (
           <div className="text-center text-gray-500">
-            No articles found for "{selectedCategory}".
+            No articles found for "{selectedCategory}"
           </div>
         ) : (
           filteredArticles.map((article, index) => (
             <div
               key={index}
-              className="bg-light-body rounded-lg overflow-hidden group hover:bg-cards-light transition duration-300"
+              className=" relative border max-w-[370px] bg-light-body rounded-lg p-4 overflow-hidden group hover:bg-cards-light transition duration-300"
             >
               <img
                 src={article.thumbnail}
                 alt="Banner"
-                className="w-80 h-40 object-cover mx-auto"
+                className="w-full h-60 object-cover mx-auto rounded"
               />
-              <div className="p-4">
+              <div className="p-4 flex flex-col item-center justify-center gap-4">
                 <div className="flex items-center mb-2">
                     <img
                     className="rounded-full w-6 ring-4 ring-light-body mr-2"
@@ -72,13 +72,13 @@ const Main = () => {
                 </div>
                 <h2 className="text-xl font-semibold font-serif leading-tight">{article.title}</h2>
                 <p className="text-sm text-gray-500 mb-2 font-sans">{article.category}</p>
-                <p className="text-gray-600 font-sans mb-4">
+                <p className="text-gray-600 font-sans mb-4 pb-2">
                     {truncateText(article.content, 100)}
                 </p>
                 <div>
                     <Link
                     to={`/ArticlePost/${article.id}`}
-                    className="p-2 bg-hover-dark text-dark-text"
+                    className="p-2 bg-hover-dark text-dark-text absolute bottom-5"
                     >
                     <i className="bx bx-right-arrow-alt"></i>
                     </Link>
@@ -90,7 +90,7 @@ const Main = () => {
         {showSeeAllLink && (
           <Link
             to="/subArticles"
-            className="text-orange-500 hover:underline text-right mt-4"
+            className="text-orange-500 hover:underline text-right"
           >
             See All
           </Link>
