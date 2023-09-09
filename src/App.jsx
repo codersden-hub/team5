@@ -12,11 +12,12 @@ import UserProfile from "./pages/profiles/UserProfile";
 import Footer from "./components/footer/footer";
 import { Routes, Route } from "react-router-dom";
 import CreateArticle from "./components/articlesPage/createPost";
+import ImageUpload from "./components/Upload/Upload";
 
 const App = () => {
   return (
     <>
-      <Navbar /> 
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/admin/jamesisrael" element={<AdminProfile />} />
         <Route path="/jamesisrael" element={<UserProfile />} />
         <Route path="/admin/jamesisrael/new-post" element={<CreateArticle />} />
+        <Route path="/upload" element={<ImageUpload />}></Route>
       </Routes>
       <Footer />
     </>

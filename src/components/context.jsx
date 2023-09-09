@@ -8,7 +8,7 @@ import {
 import app from "../firebase";
 import validator from "validator";
 import { db } from "../firebase";
-import {addDoc, collection, getDocs} from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 const AppContext = React.createContext();
 
@@ -25,47 +25,48 @@ export const ContextApp = ({ children }) => {
   // const [adminDetail, setAdminDetail] = useState();
   const [isLoginIn, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const [displayedPost, setDisplayedPost] = useState(
+    JSON.parse(localStorage.getItem("post-info"))
+  );
+  const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const userCollection = collection(db, "Users");
 
-   const addUser = async (user) => {
-    
-     await addDoc(userCollection, {
-       userName: name,
-       userEmail: user,
-       role: ["user"],
-     });
-   };
+  const addUser = async (user, id) => {
+    await addDoc(userCollection, {
+      userId: id,
+      userName: name,
+      userEmail: user,
+      role: ["user"],
+    });
+  };
 
-  const getUser = async() => {
+  const getUser = async () => {
     setIsAdmin(false);
     const data = await getDocs(userCollection);
     let userAdmin = data.docs.map((item) => {
-     return {...item.data(), id: item.id}
-    })
+      return { ...item.data(), id: item.id };
+    });
     // setAdminDetail(userAdmin);
     let user = localStorage.getItem("user");
-    user? setIsLogin(true) : setIsLogin(false);
+    user ? setIsLogin(true) : setIsLogin(false);
     for (const i of userAdmin) {
-      if(i.userEmail === user) {
+      if (i.userId === user) {
         setEmail(i.userEmail);
         setName(i.userName);
       }
 
-      if ( i.userEmail === user && i.role[1]) {
+      if (i.userId === user && i.role[1]) {
         setIsAdmin(true);
         break;
       }
     }
-    
-  }
+  };
   useEffect(() => {
     getUser();
-  }, [])
-
- 
+  }, []);
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
@@ -93,7 +94,7 @@ export const ContextApp = ({ children }) => {
           setTimeout(() => {
             alert("Success, now you can Log in");
           }, 500);
-          addUser(user.email);
+          addUser(user.email, user.uid);
         }
       })
       .catch((error) => {
@@ -109,21 +110,19 @@ export const ContextApp = ({ children }) => {
       setMessage("Please, enter valid Email!");
     }
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      if (user) {
-        localStorage.setItem(
-          "user",
-          user.email
-        );
-        navigate("/");
-        setTimeout(() => {
-          alert("Success");
-        }, 500);
-      }
-      getUser();
-      setPassword("");
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        if (user) {
+          localStorage.setItem("user", user.uid);
+          navigate("/");
+          setTimeout(() => {
+            alert("Success");
+          }, 500);
+        }
+        getUser();
+        setPassword("");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -154,7 +153,13 @@ export const ContextApp = ({ children }) => {
         emailValidMessage,
         setIsLogin,
         isLoginIn,
-        isAdmin
+        isAdmin,
+        displayedPost,
+        setDisplayedPost,
+        scroll,
+        setScroll,
+        selectedImage,
+        setSelectedImage,
       }}
     >
       {children}
