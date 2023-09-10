@@ -31,7 +31,7 @@ const QuillEditor = ({ value, onChange }) => {
     const deleteIcon = image.querySelector('.delete-image-icon');
     if (!deleteIcon) {
       const icon = document.createElement('span');
-      icon.innerHTML = 'X'; 
+      icon.innerHTML = 'X';
       icon.classList.add('delete-image-icon', 'absolute', 'top-1', 'right-1', 'text-red-500', 'cursor-pointer');
       icon.addEventListener('click', () => deleteImage(image));
       image.appendChild(icon);
@@ -54,27 +54,30 @@ const QuillEditor = ({ value, onChange }) => {
   const handleImageLoaded = (event) => {
     const image = event.target;
     image.style.display = 'block';
-    image.style.width = '100%'; 
+    image.style.width = '100%';
   };
 
 
   return (
     <div className="image-container relative">
-      <ReactQuill className="custom-quill-editor"
-        ref={editorRef}
-        value={value}
-        onChange={onChange}
-        modules={modules}
-        formats={formats}
-        onClick={(event) => {
-          const image = event.target.closest('img');
-          if (image) {
-            handleImageClick(image);
-          }
-        }}
-        onMouseEnter={handleImageMouseEnter}
-        onMouseLeave={handleImageMouseLeave}
-      />
+      <div className="h-64 custom-quill-editor overflow-auto">
+        <ReactQuill
+          ref={editorRef}
+          value={value}
+          onChange={onChange}
+          modules={modules}
+          formats={formats}
+          onClick={(event) => {
+            const image = event.target.closest('img');
+            if (image) {
+              handleImageClick(image);
+            }
+          }}
+          onMouseEnter={handleImageMouseEnter}
+          onMouseLeave={handleImageMouseLeave}
+          className="h-screen"
+        />
+      </div>
       <style>
         {`
           .ql-editor img, .ql-editor video {
@@ -82,6 +85,26 @@ const QuillEditor = ({ value, onChange }) => {
             max-width: 100%;
             height: auto;
             margin: 0 auto;
+          }
+
+          .custom-quill-editor {
+            scrollbar-width: thin;
+            scrollbar-color: #ccc #f3f3f3;
+          }
+
+          /* Remove up and down arrows */
+          .custom-quill-editor::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border: none;
+          }
+
+          /* Add some padding */
+          .custom-quill-editor::-webkit-scrollbar {
+            width: 12px;
+          }
+
+          .custom-quill-editor::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
           }
         `}
       </style>

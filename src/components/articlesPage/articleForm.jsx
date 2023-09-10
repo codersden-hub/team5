@@ -41,7 +41,7 @@ const ArticleForm = ({ onSubmit }) => {
 
   const isFormValid = title && editorHtml && category !== "None";
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white  rounded-lg shadow-md dark:shadow-cards-light">
+    <div className="max-w-screen-md min-h-scren mx-auto p-6 bg-white rounded-lg my-6">
       <h2 className="text-center text-2xl font-semibold mb-4">
         Create New Article
       </h2>
@@ -57,7 +57,7 @@ const ArticleForm = ({ onSubmit }) => {
           />
         ) : (
           <>
-            <div className="mb-4">
+            <div className="mb-3">
               <input
                 type="text"
                 value={title}
@@ -69,26 +69,28 @@ const ArticleForm = ({ onSubmit }) => {
             </div>
             <UploadImg />
             <div className="mb-4">
-              <QuillEditor
-                value={editorHtml}
-                onChange={handleEditorChange}
-                className="rounded border focus:outline-none focus:ring focus:border-blue-300 ov"
-              />
-            </div>
-            <div className="mb-4">
-              <select
-                value={category}
-                onChange={handleCategoryChange}
-                className="w-full p-2 rounded border focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body dark:text-dark-text"
-              >
-                <option value="None">Select Category</option>
-                <option value="Technology">Technology</option>
-                <option value="Frontend">Frontend</option>
-                <option value="Backend">Backend</option>
-                <option value="Design">Design</option>
-                <option value="Algorithms">Algorithms</option>
-                <option value="Security">Security</option>
-              </select>
+              <div>
+                <QuillEditor
+                  value={editorHtml}
+                  onChange={handleEditorChange}
+                  className="rounded border focus:outline-none focus:ring focus:border-blue-300 ov"
+                />
+              </div>
+              <div className="mb-4">
+                <select
+                  value={category}
+                  onChange={handleCategoryChange}
+                  className="w-full p-2 rounded border focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body dark:text-dark-text"
+                >
+                  <option value="None">Select Category</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Frontend">Frontend</option>
+                  <option value="Backend">Backend</option>
+                  <option value="Design">Design</option>
+                  <option value="Algorithms">Algorithms</option>
+                  <option value="Security">Security</option>
+                </select>
+              </div>
             </div>
           </>
         )}

@@ -7,22 +7,17 @@ import SingleComment from "../../components/SingleComment/SingleComment";
 import images from "../../UI/constants/images";
 import Comments from "../../components/Comments/Comments";
 
-const AdminProfile = () => {
+const Profile = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [inputComment, setInputComment] = useState("");
-  const {
-    displayedPost,
-    setDisplayedPost,
-    name,
-    email,
-    setScroll,
-  } = useGlobalContext();
-  // Dynamic Rendering For Comments
-  const comments = displayedPost.comment;
+  const { displayedPost, setDisplayedPost, name, email, setScroll } =
+    useGlobalContext();
+
   // Function To Handle Search To Filter Posts
   const handleSearchValue = (e) => {
     let value = e.target.value;
     setInputSearch(value);
+    console.log(inputSearch);
   };
   const handleCommentValue = (e) => {
     let value = e.target.value;
@@ -52,7 +47,7 @@ const AdminProfile = () => {
   const commentInputField = useMemo(
     () => (
       <textarea
-        className="w-full rounded-3xl outline-none text-light-text p-5 pr-16 overflow-y-hidden text-start"
+        className="w-full rounded-3xl border dark:border-none outline-none text-light-text p-5 pr-16 overflow-y-hidden text-start"
         type="text"
         name="comment"
         id="comment"
@@ -74,7 +69,7 @@ const AdminProfile = () => {
     const newComment = {
       username: name,
       email: email,
-      img: images.avatar4,
+      img: images.profile,
       time: "7hrs",
       message: inputComment,
     };
@@ -114,7 +109,7 @@ const AdminProfile = () => {
     <div className="px-5 lg:px-16 w-full flex justify-between bg-light-body dark:bg-dark-body p-4">
       <div className="w-full flex flex-col items-start justify-between md:w-1/2">
         <header className="text-light-header dark:text-dark-header font-sans flex w-full justify-between p-2">
-          <h1 className="text-3xl">Hello, James</h1>
+          <h1 className="text-3xl">Hello, {name}</h1>
           <Link
             to="/admin/jamesisrael/new-post"
             className="capitalize text-xs text-hover-dark mt-2 cursor-pointer flex items-center gap-1 hover:text-dark-footer dark:text-light-body dark:hover:text-border-light border p-2 rounded-3xl"
@@ -148,12 +143,19 @@ const AdminProfile = () => {
         </div>
       </div>
       <aside className="hidden md:flex flex-col w-2/5 dark:bg-[#111111] bg-cards-light rounded-md h-[35rem] p-4  text-light-text dark:text-dark-text relative">
-        <div className=" border p-1.5 rounded-md mb-3">
-          <h5 className="pb-4 font-sans">{displayedPost.headLine}</h5>
-        </div>
-        <Comments messages={inputComment}>
-          {comments &&
-            comments.map((comment, index) => (
+        {!displayedPost && (
+          <p className="p-2 text-base text-center font-bold text-border-light m-auto">
+            Click On A Post To Read and Respond To Comments
+          </p>
+        )}
+        {displayedPost && (
+          <div className=" border p-1.5 rounded-md mb-3">
+            <h5 className="pb-4 font-sans">{displayedPost.headLine}</h5>
+          </div>
+        )}
+        {displayedPost && (
+          <Comments messages={inputComment}>
+            {displayedPost.comment.map((comment, index) => (
               <SingleComment
                 name={comment.username}
                 img={comment.img}
@@ -163,19 +165,20 @@ const AdminProfile = () => {
               />
             ))}
 
-          <div className="absolute bottom-4 p-0 w-[85%] font-sans">
-            {commentInputField}
-            <button
-              className="absolute m-auto top-0 bottom-0 right-2 px-1 rounded-tr-full rounded-br-full  text-hover-dark outline-none hover:scale-90 transition-transform duration-200 ease-in"
-              onClick={sendCommentHandler}
-            >
-              <i className="bx bxs-send bx-sm"></i>
-            </button>
-          </div>
-        </Comments>
+            <div className="absolute bottom-4 p-0 w-[85%] font-sans">
+              {commentInputField}
+              <button
+                className="absolute m-auto top-0 bottom-0 right-2 px-1 rounded-tr-full rounded-br-full  text-hover-dark outline-none hover:scale-90 transition-transform duration-200 ease-in"
+                onClick={sendCommentHandler}
+              >
+                <i className="bx bxs-send bx-sm"></i>
+              </button>
+            </div>
+          </Comments>
+        )}
       </aside>
     </div>
   );
 };
 
-export default AdminProfile;
+export default Profile;

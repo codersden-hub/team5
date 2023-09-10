@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -27,12 +27,11 @@ export const ContextApp = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [articlesData, setArticlesData] =useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
-  const [displayedPost, setDisplayedPost] = useState(
-    JSON.parse(localStorage.getItem("post-info"))
-  );
-  const [scroll, setScroll] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [displayedPost, setDisplayedPost] = useState(null);
+  const [scroll, setScroll] = useState(false);
+  const [adminModal, setAdminModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -205,7 +204,9 @@ export const ContextApp = ({ children }) => {
         setScroll,
         error,
         loading,
-        setLoading
+        setLoading,
+        adminModal,
+        setAdminModal,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const HeaderAndFilter = ({ categories, onCategoryChange }) => {
+const SubHeaderAndFilter = ({ categories, onCategoryChange }) => {
     const [searchCategory, setSearchCategory] = useState('Latest Articles');
 
     const handleCategoryChange = (e) => {
@@ -30,4 +30,4 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
     );
 };
 
-export default HeaderAndFilter;
+export default SubHeaderAndFilter;
