@@ -31,7 +31,7 @@ const ArticleForm = ({ onSubmit }) => {
 
   const isFormValid = title && editorHtml && category !== "None";
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white  rounded-lg shadow-md dark:shadow-cards-light">
+    <div className="max-w-screen-md min-h-scren mx-auto p-6 bg-white rounded-lg my-6">
       <h2 className="text-center text-2xl font-semibold mb-4">
         Create New Article
       </h2>
@@ -47,7 +47,7 @@ const ArticleForm = ({ onSubmit }) => {
           />
         ) : (
           <>
-            <div className="mb-4">
+            <div className="mb-3">
               <input
                 type="text"
                 value={title}
@@ -57,7 +57,7 @@ const ArticleForm = ({ onSubmit }) => {
                 dark:text-dark-text  focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body"
               />
             </div>
-            <div className="mb-4">
+            <div>
               <QuillEditor
                 value={editorHtml}
                 onChange={handleEditorChange}

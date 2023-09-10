@@ -261,5 +261,3 @@ export const articles = [
     ],
   },
 ];
-
-// export articles;
