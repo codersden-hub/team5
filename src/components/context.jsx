@@ -25,7 +25,7 @@ export const ContextApp = ({ children }) => {
   // const [adminDetail, setAdminDetail] = useState();
   const [isLoginIn, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [articlesData, setArticlesData] =useState([]);
+  const [articlesData, setArticlesData] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,15 +36,14 @@ export const ContextApp = ({ children }) => {
   const [updatedId, setUpdatedId] = useState(null);
   const [role, setRole] = useState(null);
   const [commentsAvailability, setCommentAvailability] = useState(true);
-  
+  const [textContent, setTextContent] = useState("");
+
   //  const [display, setDisplay] = useState("Add User");
 
   const navigate = useNavigate();
 
   const userCollection = collection(db, "Users");
-  const posts = collection(db, "Posts")
-
-   
+  const posts = collection(db, "Posts");
 
   const addUser = async (user, id) => {
     await addDoc(userCollection, {
@@ -79,21 +78,19 @@ export const ContextApp = ({ children }) => {
   };
   useEffect(() => {
     getUser();
-  }, [])
+  }, []);
 
   const getPosts = async () => {
-    const data = await getDocs(posts)
+    const data = await getDocs(posts);
     let postData = data.docs.map((item) => {
       return { ...item.data(), id: item.id };
     });
-   setArticlesData(postData);
+    setArticlesData(postData);
   };
 
   useEffect(() => {
     getPosts();
-  }, [])
-
- 
+  }, []);
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
@@ -137,21 +134,18 @@ export const ContextApp = ({ children }) => {
       setMessage("Please, enter valid Email!");
     }
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      if (user) {
-        localStorage.setItem(
-          "user",
-          user.uid
-        );
-        navigate("/");
-        setTimeout(() => {
-          alert("Success");
-        }, 500);
-      }
-      getUser();
-      setPassword("");
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        if (user) {
+          localStorage.setItem("user", user.uid);
+          navigate("/");
+          setTimeout(() => {
+            alert("Success");
+          }, 500);
+        }
+        getUser();
+        setPassword("");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -175,9 +169,7 @@ export const ContextApp = ({ children }) => {
       console.log(error);
       setError(true);
     }
-  }
-
-  
+  };
 
   return (
     <AppContext.Provider
@@ -222,7 +214,9 @@ export const ContextApp = ({ children }) => {
         role,
         setRole,
         commentsAvailability,
-        setCommentAvailability
+        setCommentAvailability,
+        textContent,
+        setTextContent,
       }}
     >
       {children}
