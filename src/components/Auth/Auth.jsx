@@ -5,7 +5,7 @@ const Auth = () => {
   return (
     <>
       <div
-        className="md:flex flex-col items-center justify-around
+        className="flex flex-col items-center justify-around
        text-center p-4"
       >
         <NavLink
