@@ -11,7 +11,7 @@ const CreateArticle = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-light-body dark:text-dark-text pt-24 dark:bg-dark-body">
+    <div className="w-full bg-light-body dark:text-dark-text pt-24 dark:bg-dark-body">
       <ArticleForm onSubmit={handleSubmit} />
     </div>
   );

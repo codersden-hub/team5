@@ -7,13 +7,13 @@ const modules = {
     [{ 'header': [1, 2, 3, false] }],
     ['bold', 'italic', 'underline', 'blockquote'],
     [{ 'list': 'bullet' }],
-    ['link', "image"],
+    ['link'],
     ['code-block'],
   ],
 };
 
 const formats = [
-  'header', 'bold', 'italic', 'underline', 'blockquote', 'bullet', 'link', "image", 'code-block', 'bullet',
+  'header', 'bold', 'italic', 'underline', 'blockquote', 'bullet', 'link', 'code-block', 'bullet',
 ];
 
 const QuillEditor = ({ value, onChange }) => {

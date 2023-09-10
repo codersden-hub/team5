@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import { useGlobalContext } from "../context";
 import QuillEditor from "./editor";
 import ArticlePreview from "./preview";
-import UploadImg from "./uploadImg";
-import { useGlobalContext } from "../context";
+import UploadImg from "../articlesPage/uploadImg"
 
 const ArticleForm = ({ onSubmit }) => {
+  const { error, loading, setSelectedImg } = useGlobalContext();
   const [title, setTitle] = useState("");
   const [editorHtml, setEditorHtml] = useState("");
   const [category, setCategory] = useState("");
   const [showPreview, setShowPreview] = useState(false);
-  const { error, loading, setSelectedImg } = useGlobalContext();
   
-  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit({ title, category, editorHtml });
+    setTitle("");
+    setEditorHtml("");
+    setCategory("");
+    setSelectedImg(null);
+  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -25,23 +32,13 @@ const ArticleForm = ({ onSubmit }) => {
     setCategory(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit({ title, category, editorHtml });
-    setTitle("");
-    setEditorHtml("");
-    setCategory("");
-    setSelectedImg(null);
-  };
-
   const togglePreview = () => {
     setShowPreview(!showPreview);
   };
 
-
   const isFormValid = title && editorHtml && category !== "None";
   return (
-    <div className="max-w-screen-md min-h-scren mx-auto p-6 bg-white rounded-lg my-6">
+    <div className="max-w-screen-md min-h-screen mx-auto p-6 bg-white rounded-lg mt-6">
       <h2 className="text-center text-2xl font-semibold mb-4">
         Create New Article
       </h2>
@@ -51,8 +48,8 @@ const ArticleForm = ({ onSubmit }) => {
       >
         {showPreview ? (
           <ArticlePreview
-            headLine={title}
-            minContent={editorHtml}
+            title={title}
+            content={editorHtml}
             category={category}
           />
         ) : (
@@ -63,34 +60,31 @@ const ArticleForm = ({ onSubmit }) => {
                 value={title}
                 onChange={handleTitleChange}
                 placeholder="Title"
-                className="w-full p-2 rounded border dark:border-border-dark
-                dark:text-dark-text  focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body"
+                className="w-full p-2 rounded border  dark:border-border-dark dark:text-dark-text  focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body"
               />
             </div>
             <UploadImg />
+            <div>
+              <QuillEditor
+                value={editorHtml}
+                onChange={handleEditorChange}
+                className="rounded border focus:outline-none focus:ring focus:border-blue-300 ov"
+              />
+            </div>
             <div className="mb-4">
-              <div>
-                <QuillEditor
-                  value={editorHtml}
-                  onChange={handleEditorChange}
-                  className="rounded border focus:outline-none focus:ring focus:border-blue-300 ov"
-                />
-              </div>
-              <div className="mb-4">
-                <select
-                  value={category}
-                  onChange={handleCategoryChange}
-                  className="w-full p-2 rounded border focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body dark:text-dark-text"
-                >
-                  <option value="None">Select Category</option>
-                  <option value="Technology">Technology</option>
-                  <option value="Frontend">Frontend</option>
-                  <option value="Backend">Backend</option>
-                  <option value="Design">Design</option>
-                  <option value="Algorithms">Algorithms</option>
-                  <option value="Security">Security</option>
-                </select>
-              </div>
+              <select
+                value={category}
+                onChange={handleCategoryChange}
+                className="w-full p-2 rounded border focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body dark:text-dark-text"
+              >
+                <option value="None">Select Category</option>
+                <option value="Technology">Technology</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Design">Design</option>
+                <option value="Algorithms">Algorithms</option>
+                <option value="Security">Security</option>
+              </select>
             </div>
           </>
         )}
@@ -111,9 +105,9 @@ const ArticleForm = ({ onSubmit }) => {
             } hover:bg-blue-600 text-white cursor-pointer py-2 px-4 rounded-lg border border-blue-500`}
             disabled={!isFormValid}
           >
-            {loading ? <p>Loading...</p> : <p>Publish</p>}
+            {loading ? <p>Loading</p> : <p>Publish</p>}
           </button>
-          {error && <p className="text-[red]">Error publishing post</p>}
+          {error && <p>Error posting article</p>}
         </div>
       </form>
     </div>

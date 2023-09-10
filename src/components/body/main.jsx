@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context';
-import HeaderAndFilter from './Header';
+import images from "../../UI/constants/images";
+import HeaderAndFilter from "./mainHeader";
 
 const Main = () => {
     const {articlesData} = useGlobalContext();
-    console.log(articlesData);
     // const [article, setArticle] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('Latest Articles');
 
@@ -19,31 +19,39 @@ const Main = () => {
     const filteredArticles = articlesToDisplay.filter((article) => {
         return selectedCategory === 'Latest Articles' || article.category === selectedCategory;
     });
-    const categories = ['Latest Articles', "Technology", 'Javascript', 'Design', 'Algorithms', 'UI/UX', 'Security']; 
+    const categories = ['Latest Articles', "Technology", 'Javascript', 'Design', 'Algorithms', 'UI/UX', 'Security'];
 
-
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) {
-      return text;
-    }
-    return text.slice(0, maxLength)+'...';
-  };
-
-  return (
-    <>
-      <HeaderAndFilter
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={(category) => setSelectedCategory(category)}
-      />
-      <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredArticles.length === 0 ? (
-          <div className="text-center text-gray-500">
-            No articles found for "{selectedCategory}".
-          </div>
-        ) : (
-          filteredArticles.map((article, index) => (
-            <div
+    // const truncateText = (text, maxLength) => {
+    // if (text.length <= maxLength) {
+    //   return text;
+    // }
+    // return text.slice(0, maxLength)+'...';
+    // };
+   
+    return (
+      <div className='w-full mx-10'>
+        <HeaderAndFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={(category) => setSelectedCategory(category)}
+        />
+        <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredArticles.length === 0 ? (
+            <div className="text-center text-gray-500">
+              No articles found for "{selectedCategory}".
+            </div>
+          ) : (
+            filteredArticles.map((article, index) => {
+              const text = (
+                <div
+                  className="text-gray-600 font-sans mb-4"
+                  dangerouslySetInnerHTML={{
+                    __html: article.editorHtml,
+                  }}
+                />
+              );
+              return (
+                <div
               key={index}
               className="bg-light-body rounded-lg overflow-hidden group hover:bg-cards-light transition duration-300"
             >
@@ -63,9 +71,10 @@ const Main = () => {
                 </div>
                 <h2 className="text-xl font-semibold font-serif leading-tight">{article.title}</h2>
                 <p className="text-sm text-gray-500 mb-2 font-sans">{article.category}</p>
-                <p className="text-gray-600 font-sans mb-4">
-                    {truncateText(article.content, 100)}
-                </p>
+                    {/* {truncateText(text, 100)} */}
+                <div
+                   dangerouslySetInnerHTML={{__html: text.props.dangerouslySetInnerHTML.__html.slice(0, 100)}}
+                  />
                 <div>
                     <Link
                     to={`/ArticlePost/${article.id}`}
@@ -76,19 +85,51 @@ const Main = () => {
                 </div>
               </div>
             </div>
-          ))
-        )}
-        {showSeeAllLink && (
-          <Link
-            to="/subArticles"
-            className="text-orange-500 hover:underline text-right mt-4"
-          >
-            See All
-          </Link>
-        )}
+              );
+            })
+          )}
+        </div>
+        <div className="w-20 ml-auto text-orange-500 hover:underline mt-4">
+          {showSeeAllLink && (
+            <Link to="/catalog" >
+              See All
+            </Link>
+          )}
+        </div>
       </div>
-    </>
-  );
-};
+    );          
+  };
+
+
+  
+
+//   return (
+//     <>
+//       <HeaderAndFilter
+//         categories={categories}
+//         selectedCategory={selectedCategory}
+//         onCategoryChange={(category) => setSelectedCategory(category)}
+//       />
+//       <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+//         {filteredArticles.length === 0 ? (
+//           <div className="text-center text-gray-500">
+//             No articles found for "{selectedCategory}".
+//           </div>
+//         ) : (
+//           filteredArticles.map((article, index) => (
+            
+//           ))
+//         )}
+//         {showSeeAllLink && (
+//           <Link
+//             to="/subArticles"
+//             className="text-orange-500 hover:underline text-right mt-4"
+//           >
+//             See All
+//           </Link>
+//         )}
+//       </div>
+//     </>
+//   );
 
 export default Main;

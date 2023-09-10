@@ -1,12 +1,20 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import images from "../../UI/constants/images";
 import { useGlobalContext } from "../context";
 import UserData from "../UserData/UserData";
+import { updateDoc, doc, collection } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const AddAdmin = () => {
-  const { adminModal, setAdminModal } = useGlobalContext();
-  const [addAdmin, setAddAmin] = useState("");
+  const [addAdmin, setAddAdmin] = useState("");
+  const { adminModal, setAdminModal, usersList, updatedId } =
+    useGlobalContext();
+
+    const userCollection = collection(db, "Users");
+
+    // const docRef = db.collection("Users").doc(updatedId);
+
 
   const inputAdmin = useMemo(() => {
     return (
@@ -15,83 +23,42 @@ const AddAdmin = () => {
         className="w-full p-2 border outline-none rounded-md"
         placeholder="Enter Your Email"
         value={addAdmin}
-        onChange={(event) => setAddAmin(event.target.value)}
+        onChange={(event) => setAddAdmin(event.target.value)}
       />
     );
   }, [addAdmin]);
-  const users = [
-    {
-      id: 1,
-      name: "emmanuel",
-      email: "emmanuel143@gmail.com",
-      pImage: images.avatar1,
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      email: "johndoe143@gmail.com",
-      pImage: images.avatar2,
-    },
-    {
-      id: 3,
-      name: "Victor",
-      email: "victor143@gmail.com",
-      pImage: images.avatar3,
-    },
-    {
-      id: 4,
-      name: "Hazi",
-      email: "hazibro3@gmail.com",
-      pImage: images.avatar4,
-    },
-    {
-      id: 5,
-      name: "James Israel",
-      email: "yongeazi143@gmail.com",
-      pImage: images.avatar5,
-    },
-    {
-      id: 6,
-      name: "Chisom Daniels",
-      email: "chisomdan3@gmail.com",
-      pImage: images.avatar2,
-    },
-    {
-      id: 7,
-      name: "Chioma James",
-      email: "chioma@gmail.com",
-      pImage: images.avatar4,
-    },
-    {
-      id: 8,
-      name: "Vitoria James",
-      email: "jamesvictoria@gmail.com",
-      pImage: images.avatar1,
-    },
-    {
-      id: 9,
-      name: "Chinonso Daniels",
-      email: "chinonsodaniels@gmail.com",
-      pImage: images.avatar5,
-    },
-    {
-      id: 10,
-      name: "Code Edx",
-      email: "codeedx45@gmail.com",
-      pImage: images.avatar1,
-    },
-  ];
-  const user = users.filter((_user) =>
-    _user.email.toLowerCase().includes(addAdmin.trim().toLowerCase())
-  );
-  const uEle = user.map((data) => {
-    const { id, name, email, pImage } = data;
-    return <UserData key={id} name={name} email={email} uImage={pImage} />;
+
+  const user = usersList.filter((_user) =>{
+    return _user.userEmail.toLowerCase().includes(addAdmin.trim().toLowerCase()) && _user.role.length === 1
   });
+
+
+  console.log(user);
+  const uEle = user.map((data) => {
+    const { userName, userEmail, userId, id, role } = data;
+    return (
+      <UserData
+        key={userId}
+        id={id}
+        role={role}
+        name={userName}
+        email={userEmail}
+        uImage={images.avatar4}
+        setAddAdmin={setAddAdmin}
+      />
+    );
+  });
+
+  const addAdminHandler = async () => {
+    setAddAdmin("");
+    const updateRole = {role: ["user","admin"]}
+    const userDoc = doc(db, "Users", updatedId);
+    await updateDoc(userDoc, updateRole);
+  }
 
   return (
     <>
-      {/* <Backdrop show={adminModal} clicked={() => setAdminModal(!adminModal)} /> */}
+      <Backdrop show={adminModal} clicked={() => setAdminModal(!adminModal)} />
       {adminModal && (
         <div className="fixed mx-auto flex flex-col items-center justify-center z-[999999] top-[30%] left-1/2 -translate-x-2/4  bg-cards-light p-4 w-[400px] lg:w-[500px] rounded-lg shadow-xl">
           <h5 className="font-sans mb-2">Add User To Admin List</h5>
@@ -106,14 +73,17 @@ const AddAdmin = () => {
             ) : null}
           </div>
           <div className="w-full flex items-center justify-between p-4 flex-row-reverse">
-            <button className="p-2 border rounded-md cursor-pointer hover:font-bold">
+            <button
+              className="p-2 border rounded-md cursor-pointer hover:font-bold"
+              onClick={addAdminHandler}
+            >
               Add User
             </button>
             <button
               className="p-2 border rounded-md cursor-pointer hover:font-bold"
-              onClick={() => setAdminModal(false)}
+              onClick={() => setAddAdmin("")}
             >
-              Cancel
+              Clear
             </button>
           </div>
         </div>

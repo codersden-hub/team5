@@ -3,11 +3,16 @@ import images from "../../UI/constants/images";
 import { useGlobalContext } from "../../components/context";
 // import {}
 
-const Article = ({ data, headLine, datePosted, thumbnail }) => {
-  const { setDisplayedPost, isAdmin } = useGlobalContext();
+const Article = ({ inputComment, post, headLine, thumbnail }) => {
+  const { isAdmin, setCommentAvailability } = useGlobalContext();
   const handleClickedArticle = () => {
-    setDisplayedPost(data);
-    localStorage.setItem("post-info", JSON.stringify(data));
+
+    if (post.comments.length < 1) {
+      setCommentAvailability(false)
+    } else{
+      setCommentAvailability(true);
+    }
+    // localStorage.setItem("post-info", JSON.stringify(comments));
   };
   return (
     <div
@@ -23,7 +28,7 @@ const Article = ({ data, headLine, datePosted, thumbnail }) => {
         </div>
         <div className="self-start text-sm p-2 ">
           <h6 className=" font-bold mb-3 md:text-lg lg:text-xl">{headLine}</h6>
-          <p className="text-light-text dark:text-border-light">{datePosted}</p>
+          {/* <p className="text-light-text dark:text-border-light">{datePosted}</p> */}
         </div>
       </div>
       <div className="w-full flex justify-between items-center p-2">

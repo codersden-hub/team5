@@ -29,14 +29,22 @@ export const ContextApp = ({ children }) => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [displayedPost, setDisplayedPost] = useState(null);
+  const [displayedPost, setDisplayedPost] = useState([]);
   const [scroll, setScroll] = useState(false);
   const [adminModal, setAdminModal] = useState(false);
+  const [usersList, setUsersList] = useState([]);
+  const [updatedId, setUpdatedId] = useState(null);
+  const [role, setRole] = useState(null);
+  const [commentsAvailability, setCommentAvailability] = useState(true);
+  
+  //  const [display, setDisplay] = useState("Add User");
 
   const navigate = useNavigate();
 
   const userCollection = collection(db, "Users");
   const posts = collection(db, "Posts")
+
+   
 
   const addUser = async (user, id) => {
     await addDoc(userCollection, {
@@ -53,6 +61,7 @@ export const ContextApp = ({ children }) => {
     let userAdmin = data.docs.map((item) => {
       return { ...item.data(), id: item.id };
     });
+    setUsersList(userAdmin);
     // setAdminDetail(userAdmin);
     let user = localStorage.getItem("user");
     user ? setIsLogin(true) : setIsLogin(false);
@@ -207,6 +216,13 @@ export const ContextApp = ({ children }) => {
         setLoading,
         adminModal,
         setAdminModal,
+        usersList,
+        updatedId,
+        setUpdatedId,
+        role,
+        setRole,
+        commentsAvailability,
+        setCommentAvailability
       }}
     >
       {children}
