@@ -13,6 +13,7 @@ import UserProfile from "./pages/profiles/UserProfile";
 import Footer from "./components/footer/footer";
 import { Routes, Route } from "react-router-dom";
 import CreateArticle from "./components/articlesPage/createPost";
+
 const App = () => {
   return (
     <div>

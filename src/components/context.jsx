@@ -25,11 +25,27 @@ export const ContextApp = ({ children }) => {
   // const [adminDetail, setAdminDetail] = useState();
   const [isLoginIn, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [displayedPost, setDisplayedPost] = useState(null);
+  const [articlesData, setArticlesData] =useState([]);
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [displayedPost, setDisplayedPost] = useState([]);
   const [scroll, setScroll] = useState(false);
-  const navigate = useNavigate();
-  const userCollection = collection(db, "Users");
   const [adminModal, setAdminModal] = useState(false);
+  const [usersList, setUsersList] = useState([]);
+  const [updatedId, setUpdatedId] = useState(null);
+  const [role, setRole] = useState(null);
+  const [commentsAvailability, setCommentAvailability] = useState(true);
+  
+  //  const [display, setDisplay] = useState("Add User");
+
+  const navigate = useNavigate();
+
+  const userCollection = collection(db, "Users");
+  const posts = collection(db, "Posts")
+
+   
+
   const addUser = async (user, id) => {
     await addDoc(userCollection, {
       userId: id,
@@ -45,6 +61,7 @@ export const ContextApp = ({ children }) => {
     let userAdmin = data.docs.map((item) => {
       return { ...item.data(), id: item.id };
     });
+    setUsersList(userAdmin);
     // setAdminDetail(userAdmin);
     let user = localStorage.getItem("user");
     user ? setIsLogin(true) : setIsLogin(false);
@@ -62,7 +79,21 @@ export const ContextApp = ({ children }) => {
   };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [])
+
+  const getPosts = async () => {
+    const data = await getDocs(posts)
+    let postData = data.docs.map((item) => {
+      return { ...item.data(), id: item.id };
+    });
+   setArticlesData(postData);
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, [])
+
+ 
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
@@ -106,25 +137,47 @@ export const ContextApp = ({ children }) => {
       setMessage("Please, enter valid Email!");
     }
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        if (user) {
-          localStorage.setItem("user", user.uid);
-          navigate("/");
-          setTimeout(() => {
-            alert("Success");
-          }, 500);
-        }
-        getUser();
-        setPassword("");
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      if (user) {
+        localStorage.setItem(
+          "user",
+          user.uid
+        );
+        navigate("/");
+        setTimeout(() => {
+          alert("Success");
+        }, 500);
+      }
+      getUser();
+      setPassword("");
       })
       .catch((error) => {
         const errorCode = error.code;
         alert(errorCode);
       });
   };
+
+  const addPost = async (articleData) => {
+    try {
+      setLoading(true);
+      await addDoc(posts, {
+        ...articleData,
+        author: name,
+        likes: 0,
+        comments: [],
+        thumbnail: selectedImg,
+      });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      setError(true);
+    }
+  }
+
+  
 
   return (
     <AppContext.Provider
@@ -150,12 +203,26 @@ export const ContextApp = ({ children }) => {
         setIsLogin,
         isLoginIn,
         isAdmin,
+        addPost,
+        articlesData,
+        setSelectedImg,
+        selectedImg,
         displayedPost,
         setDisplayedPost,
         scroll,
         setScroll,
+        error,
+        loading,
+        setLoading,
         adminModal,
         setAdminModal,
+        usersList,
+        updatedId,
+        setUpdatedId,
+        role,
+        setRole,
+        commentsAvailability,
+        setCommentAvailability
       }}
     >
       {children}
