@@ -126,9 +126,7 @@ const Navbar = () => {
         {/* DeskTop Screen Sizes */}
         <ul className="hidden min-w-[500px] md:min-w-[300px] list-none md:flex flex-1 justify-center items-center">
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
-            <NavLink to="/" active>
-              Home
-            </NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
             <Link
