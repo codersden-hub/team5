@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -159,11 +159,11 @@ export const ContextApp = ({ children }) => {
       });
   };
 
-  const addPost = async (articleData) => {
+  const addPost = async (articlesData) => {
     try {
       setLoading(true);
       await addDoc(posts, {
-        ...articleData,
+        ...articlesData,
         author: name,
         likes: 0,
         comments: [],

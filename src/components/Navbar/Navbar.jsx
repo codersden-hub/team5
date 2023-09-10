@@ -68,7 +68,7 @@ const Navbar = () => {
       />
       <nav className="w-full top-0 flex justify-between items-center bg-light-body dark:bg-dark-body py-4 p-8 md:pr-4 z-[999999]">
         {/* Small Screen Navigation Start Here */}
-        <div className="flex cursor-pointer ">
+        <div className="flex cursor-pointer">
           <i
             className="bx bx-menu-alt-left bx-sm dark:text-dark-header md:hidden"
             onClick={() => {
@@ -124,7 +124,7 @@ const Navbar = () => {
         </div>
 
         {/* DeskTop Screen Sizes */}
-        <ul className="hidden min-w-[500px] md:min-w-[300px] list-none md:flex flex-1 justify-center items-center">
+        <ul className="mr-4 hidden min-w-[500px] md:min-w-[300px] list-none md:flex flex-1 justify-center items-center">
           <li className="p-main-text mx-4 cursor-pointer hover:text-hover-light dark:hover:text-hover-dark">
             <NavLink to="/">Home</NavLink>
           </li>
@@ -237,12 +237,13 @@ const Navbar = () => {
         </span>
         {/* 😂😂😂😂😂 */}
         <div className="hidden md:flex items-center justify-end">
-          <Link
+          <a
             to="https://docs.google.com/forms/d/e/1FAIpQLSfahFvHiyZ-og2lY-GyJzTlNq5EW-ajR5mm7PFL4zM4XBolug/viewform"
-            className="hidden mx-4 no-underline transition-all: hover:text-hover-light dark:hover:text-hover-dark p-main-text lg:block"
+            target="_blank"
+            className="hidden mx-4 no-underline cursor-pointer transition-all: hover:text-hover-light dark:hover:text-hover-dark p-main-text lg:block"
           >
             Join Community
-          </Link>
+          </a>
           <div className="hidden w-[1px] h-6 bg-border-light dark:bg-border-dark mx-2 lg:block" />
           <div className="flex items-center justify-center">
             <Link

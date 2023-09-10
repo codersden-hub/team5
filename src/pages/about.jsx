@@ -34,12 +34,13 @@ const About = () => {
           you as part of our community.
         </p>
         <div className="text-center mt-8 font-sans">
-          <Link
-            to="/join-community"
-            className="px-6 py-2 bg-hover-dark text-dark-text hover:bg-[blue-400] rounded-lg cursor-pointer transition-colors duration-300"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfahFvHiyZ-og2lY-GyJzTlNq5EW-ajR5mm7PFL4zM4XBolug/viewform"
+            target="_blank"
+            className="px-6 py-4 bg-hover-dark text-dark-text hover:bg-[#5b5be2] rounded-lg cursor-pointer transition-colors duration-300"
           >
             Join Our Community
-          </Link>
+          </a>
         </div>
       </div>
     </div>
