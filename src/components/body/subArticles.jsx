@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { mockData } from './mock';
+// import { mockData } from './mock';
+import {useGlobalContext} from "../context"
 import images from "../../UI/constants/images";
 import SubHeaderAndFilter from './subArticlesHeader';
 
 const SubArticles = () => {
+    const { articlesData } = useGlobalContext();
     const [article, setArticle] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('Latest Articles');
     const [currentPage, setCurrentPage] = useState(1);
     const articlesPerPage = 16; // 4 rows * 4 columns = 16 articles per page
 
     useEffect(() => {
-        setArticle(mockData);
+        setArticle(articlesData);
     }, []);
 
     // Calculate the total number of pages

@@ -3,11 +3,16 @@ import images from "../../UI/constants/images";
 import { useGlobalContext } from "../../components/context";
 // import {}
 
-const Article = ({ data, headLine, datePosted, thumbnail }) => {
-  const { setDisplayedPost } = useGlobalContext();
-  localStorage.setItem("post-info", JSON.stringify(data));
+const Article = ({ inputComment, post, headLine, thumbnail }) => {
+  const { isAdmin, setCommentAvailability } = useGlobalContext();
   const handleClickedArticle = () => {
-    setDisplayedPost(data);
+
+    if (post.comments.length < 1) {
+      setCommentAvailability(false)
+    } else{
+      setCommentAvailability(true);
+    }
+    // localStorage.setItem("post-info", JSON.stringify(comments));
   };
   return (
     <div
@@ -23,7 +28,7 @@ const Article = ({ data, headLine, datePosted, thumbnail }) => {
         </div>
         <div className="self-start text-sm p-2 ">
           <h6 className=" font-bold mb-3 md:text-lg lg:text-xl">{headLine}</h6>
-          <p className="text-light-text dark:text-border-light">{datePosted}</p>
+          {/* <p className="text-light-text dark:text-border-light">{datePosted}</p> */}
         </div>
       </div>
       <div className="w-full flex justify-between items-center p-2">
@@ -37,13 +42,33 @@ const Article = ({ data, headLine, datePosted, thumbnail }) => {
             <p>100</p>
           </span>
         </div>
-        <div className="flex gap-3 py-1 px-5 w-20 items-center justify-center">
-          <i className="bx bx-edit-alt text-hover-dark  bx-sm cursor-pointer"></i>
-          <i className="bx bx-trash text-hover-light cursor-pointer  bx-sm"></i>
-        </div>
+        {isAdmin && (
+          <div className="flex gap-3 py-1 px-5 w-20 items-center justify-center">
+            <i className="bx bx-edit-alt text-hover-dark  bx-sm cursor-pointer"></i>
+            <i className="bx bx-trash text-hover-light cursor-pointer  bx-sm"></i>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Article;
+// Article = [{id:1 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:2 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:3 HeadLine: 'JavaScript',Comment:[{}]]
+// Article = [{id:4 HeadLine: 'JavaScript',Comment:[{}]]
+
+// Article.map(article =>
+// article = {
+// id:,
+// HeadLine:,
+// Comment:[{},{},{}]
+// }
+
+// {<Article Headline={article.HeadLine} data={article}/>})
+// Article HeadLine ==> JavaScript ==> Comment : [{},{},{}]
+// Article HeadLine ==> Development ==> Comment : [{},{},{}]
+// Article HeadLine ==> Security ==> Comment : [{},{},{}]
+// Article HeadLine ==> DSA ==> Comment : [{},{},{}]
+// Article
