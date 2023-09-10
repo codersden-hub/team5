@@ -27,6 +27,12 @@ export const ContextApp = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [articlesData, setArticlesData] =useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
+  const [displayedPost, setDisplayedPost] = useState(
+    JSON.parse(localStorage.getItem("post-info"))
+  );
+  const [scroll, setScroll] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -146,13 +152,21 @@ export const ContextApp = ({ children }) => {
   };
 
   const addPost = async (articleData) => {
-    await addDoc(posts, {
-      ...articleData,
-      author: name,
-      likes: 0,
-      comments: [],
-      thumbnail: selectedImg,
-    });
+    try {
+      setLoading(true);
+      await addDoc(posts, {
+        ...articleData,
+        author: name,
+        likes: 0,
+        comments: [],
+        thumbnail: selectedImg,
+      });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      setError(true);
+    }
   }
 
   
@@ -188,7 +202,10 @@ export const ContextApp = ({ children }) => {
         displayedPost,
         setDisplayedPost,
         scroll,
-        setScroll
+        setScroll,
+        error,
+        loading,
+        setLoading
       }}
     >
       {children}

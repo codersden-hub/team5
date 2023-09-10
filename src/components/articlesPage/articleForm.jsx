@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import QuillEditor from "./editor";
 import ArticlePreview from "./preview";
 import UploadImg from "./uploadImg";
+import { useGlobalContext } from "../context";
 
 const ArticleForm = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [editorHtml, setEditorHtml] = useState("");
   const [category, setCategory] = useState("");
   const [showPreview, setShowPreview] = useState(false);
+  const { error, loading, setSelectedImg } = useGlobalContext();
   
   
 
@@ -26,6 +28,10 @@ const ArticleForm = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit({ title, category, editorHtml });
+    setTitle("");
+    setEditorHtml("");
+    setCategory("");
+    setSelectedImg(null);
   };
 
   const togglePreview = () => {
@@ -61,7 +67,7 @@ const ArticleForm = ({ onSubmit }) => {
                 dark:text-dark-text  focus:outline-none focus:ring focus:border-blue-300 dark:bg-dark-body"
               />
             </div>
-            <UploadImg/>
+            <UploadImg />
             <div className="mb-4">
               <QuillEditor
                 value={editorHtml}
@@ -103,8 +109,9 @@ const ArticleForm = ({ onSubmit }) => {
             } hover:bg-blue-600 text-white cursor-pointer py-2 px-4 rounded-lg border border-blue-500`}
             disabled={!isFormValid}
           >
-            Publish
+            {loading ? <p>Loading...</p> : <p>Publish</p>}
           </button>
+          {error && <p className="text-[red]">Error publishing post</p>}
         </div>
       </form>
     </div>
