@@ -56,6 +56,8 @@ const Main = () => {
                 }}
               />
             );
+            // const JsonText = JSON.stringify(text);
+            console.log(text);
             return (
               <div
                 key={index}

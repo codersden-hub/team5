@@ -11,10 +11,9 @@ const AddAdmin = () => {
   const { adminModal, setAdminModal, usersList, updatedId } =
     useGlobalContext();
 
-    const userCollection = collection(db, "Users");
+  const userCollection = collection(db, "Users");
 
-    // const docRef = db.collection("Users").doc(updatedId);
-
+  // const docRef = db.collection("Users").doc(updatedId);
 
   const inputAdmin = useMemo(() => {
     return (
@@ -28,10 +27,12 @@ const AddAdmin = () => {
     );
   }, [addAdmin]);
 
-  const user = usersList.filter((_user) =>{
-    return _user.userEmail.toLowerCase().includes(addAdmin.trim().toLowerCase()) && _user.role.length === 1
+  const user = usersList.filter((_user) => {
+    return (
+      _user.userEmail.toLowerCase().includes(addAdmin.trim().toLowerCase()) &&
+      _user.role.length === 1
+    );
   });
-
 
   console.log(user);
   const uEle = user.map((data) => {
@@ -51,10 +52,10 @@ const AddAdmin = () => {
 
   const addAdminHandler = async () => {
     setAddAdmin("");
-    const updateRole = {role: ["user","admin"]}
+    const updateRole = { role: ["user", "admin"] };
     const userDoc = doc(db, "Users", updatedId);
     await updateDoc(userDoc, updateRole);
-  }
+  };
 
   return (
     <>
