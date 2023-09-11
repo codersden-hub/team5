@@ -93,30 +93,42 @@ const Main = () => {
                     }}
                     className="p-main-text pb-8 .d-text"
                   />
-                  <div>
+                  <div className="flex w-full  items-center justify-between gap-1 absolute bottom-0 right-1">
+                    <div className="flex py-4 flex-1 items-center gap-3 text-light-header font-semibold font-sans ml-3">
+                      <span className="flex gap-1">
+                        <i className="bx bxs-heart bx-sm text-light-header"></i>
+                        2,460
+                      </span>
+                      <span className="flex gap-1">
+                        <i className="bx bxs-message-rounded-dots bx-sm "></i>
+                        200
+                      </span>
+                      <span className="flex gap-1">
+                        <i className="bx bxs-time bx-sm "></i>
+                        100
+                      </span>
+                    </div>
                     <Link
                       to={`/ArticlePost/${article.id}`}
-                      className="p-3 bg-hover-dark text-dark-text absolute right-4 bottom-2"
+                      className="p-3 rounded-sm bg-hover-dark text-dark-text "
                     >
-                      <i className="bx bx-right-arrow-alt"></i>
+                      <i className="bx bx-right-down-arrow-circle bx-md"></i>
                     </Link>
                   </div>
-                  {/* <p className="text-gray-600 font-sans mb-4 pb-2">
-                    {truncateText(articles.content, 100)}
-                  </p> */}
                 </div>
               </div>
             );
           })
         )}
       </div>
-      <div className="w-20 ml-auto text-orange-500 hover:underline mt-4">
+      <div className="w-20 ml-auto mt-4 mb-3">
         {showSeeAllLink && (
           <Link
             to="/subArticles"
-            className="text-orange-500 hover:underline text-right"
+            className="text-hover-dark font-bold font-sans hover:border  text-right flex"
           >
             See All
+            <i className="bx bx-chevron-right bx-sm"></i>
           </Link>
         )}
       </div>

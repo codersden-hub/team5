@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Main from "../components/body/main";
 const ArticlePost = ({ articles }) => {
   const { post } = useParams();
 
@@ -12,24 +13,27 @@ const ArticlePost = ({ articles }) => {
   }
 
   return (
-    <div className="m-10">
-      <img
-        src={articleSelected.thumbnail}
-        alt="Banner"
-        className="w-full h-60 object-cover"
-      />
-      <p className="text-sm text-gray-500 mt-2">
-        Author: {articleSelected.author}
-      </p>
-      <h2 className="text-2xl font-semibold mt-2">{articleSelected.title}</h2>
-      <p className="text-sm text-gray-500 mt-2">{articleSelected.category}</p>
-      {/* <div
-        dangerouslySetInnerHTML={{
-          __html: text.props.dangerouslySetInnerHTML.__html,
-        }}
-      /> */}
-      <div dangerouslySetInnerHTML={{ __html: test2.editorHtml }} />
-    </div>
+    <>
+      <div className="mx-10 lg:mx-60 ">
+        <h1 className="text-4xl font-bold my-10 font-sans">
+          {articleSelected.title}
+        </h1>
+        <p className=" mb-2 p-main-text font-semibold">
+          Author: {articleSelected.author}
+        </p>
+        <p className="text-sm text-gray-500 mt-2">{articleSelected.category}</p>
+        <img
+          src={articleSelected.thumbnail}
+          alt="Banner"
+          className="w-full h-full object-cover"
+        />
+        <div
+          dangerouslySetInnerHTML={{ __html: test2.editorHtml }}
+          className="mt-10"
+        />
+      </div>
+      {/* <Main /> */}
+    </>
   );
 };
 
