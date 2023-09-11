@@ -35,7 +35,7 @@ const Main = () => {
   ];
 
   return (
-    <div className="lg:w-[1000px] lg:mx-auto">
+    <div className="lg:w-[1100px] lg:mx-auto">
       <HeaderAndFilter
         categories={categories}
         selectedCategory={selectedCategory}

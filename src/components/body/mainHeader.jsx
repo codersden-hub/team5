@@ -42,7 +42,9 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row font-sans items-center justify-between m-10 mb-8">
-      <h1 className="text-3xl font-semibold">Latest Articles</h1>
+      <h3 className="relative inline-block font-semibold lg:font-bold  text-light-header dark:text-dark-header font-sans uppercase">
+        Latest Articles
+      </h3>
       <div className="flex items-center">
         {recentCategories.map((category, index) => (
           <button
