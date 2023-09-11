@@ -127,3 +127,7 @@ a {
     width: 85%;
   }
 }
+
+.d-text > * {
+  display: inline;
+}

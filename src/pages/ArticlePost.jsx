@@ -4,23 +4,12 @@ const ArticlePost = ({ articles }) => {
   const { post } = useParams();
 
   const articleSelected = articles.find((article) => article.id === post);
-  //   console.log(articleSelected.map(item));
   const test2 = {
     ...articleSelected,
   };
-  console.log(test2.editorHtml);
   if (!articleSelected) {
     return <div>Article not found</div>;
   }
-
-  //   const text = (
-  //     <div
-  //       className="text-gray-600 font-sans mb-4"
-  //       dangerouslySetInnerHTML={{
-  //         __html: articles.editorHtml,
-  //       }}
-  //     />
-  //   );
 
   return (
     <div className="m-10">

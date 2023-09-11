@@ -35,13 +35,13 @@ const Main = () => {
   ];
 
   return (
-    <div className="w-full mx-10">
+    <div className="lg:w-[1000px] lg:mx-auto">
       <HeaderAndFilter
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={(category) => setSelectedCategory(category)}
       />
-      <div className="m-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className=" grid grid-cols-1 md:grid-cols-3 w-full">
         {filteredArticles.length === 0 ? (
           <div className="text-center text-gray-500">
             No articles found for "{selectedCategory}".
@@ -56,36 +56,33 @@ const Main = () => {
                 }}
               />
             );
-            // const JsonText = JSON.stringify(text);
-            console.log(text);
+
             return (
               <div
                 key={index}
-                className=" relative max-w-[370px] bg-light-body rounded-lg p-4 overflow-hidden group hover:bg-cards-light transition duration-300"
+                className=" relative max-w-[320px] md:max-w-[370px] bg-light-body rounded-lg p-4 overflow-hidden group hover:bg-cards-light transition-translate duration-500 ease-out mx-auto cursor-pointer scale-90 hover:scale-100"
               >
                 <img
                   src={article.thumbnail}
                   alt="Banner"
                   className="w-full h-60 object-cover mx-auto rounded"
                 />
-                <div className="p-4 flex flex-col item-center justify-center gap-4">
+                <div className="py-6 flex flex-col item-center justify-center gap-4">
                   <div className="flex items-center mb-2">
                     <img
-                      className="rounded-full w-6 ring-4 ring-light-body mr-2"
+                      className="rounded-full w-10  mr-2"
                       src={images.avatar2}
                       alt=""
                     />
-                    <p className="text-sm text-gray-500 font-sans">
+                    <p className="text-sm text-gray-500 font-sans font-bold p-main-text">
                       {" "}
                       {article.author}
                     </p>
                   </div>
-                  <h2 className="text-xl font-semibold font-serif leading-tight">
+                  <h1 className="font-semibold font-sans leading-tight text-3xl capitalize text-light-header dark:text-dark-header">
                     {article.title}
-                  </h2>
-                  <p className="text-sm text-gray-500 mb-2 font-sans">
-                    {article.category}
-                  </p>
+                  </h1>
+                  <p className="text-sm p-main-text">-{article.category}</p>
                   {/* {truncateText(text, 100)} */}
                   <div
                     dangerouslySetInnerHTML={{
@@ -94,11 +91,12 @@ const Main = () => {
                         100
                       ),
                     }}
+                    className="p-main-text pb-8 .d-text"
                   />
                   <div>
                     <Link
                       to={`/ArticlePost/${article.id}`}
-                      className="p-2 bg-hover-dark text-dark-text absolute bottom-5"
+                      className="p-3 bg-hover-dark text-dark-text absolute right-4 bottom-2"
                     >
                       <i className="bx bx-right-arrow-alt"></i>
                     </Link>
