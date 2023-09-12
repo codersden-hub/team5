@@ -35,12 +35,12 @@ const ArticleForm = ({ onSubmit }) => {
   const togglePreview = () => {
     setShowPreview(!showPreview);
   };
-
+  // Hello World
   const isFormValid = title && editorHtml && category !== "None";
   return (
     <div className="max-w-screen-md min-h-screen mx-auto p-6 bg-white rounded-lg mt-6">
       <h2 className="text-center font-sans text-3xl font-semibold mb-4">
-        New Article
+        Create Post
       </h2>
       <form
         onSubmit={handleSubmit}
