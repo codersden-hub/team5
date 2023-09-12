@@ -50,7 +50,10 @@ const MustRead = () => {
                   }}
                   className="p-main-text m-3 .d-text"
                 />
-                <Link className="text-hover-dark font-sans py-2 text-center w-full scale-75 hover:scale-90">
+                <Link
+                  to={`/ArticlePost/${LastPosted.id}`}
+                  className="text-hover-dark font-sans py-2 text-center w-full scale-75 hover:scale-90"
+                >
                   Read More
                 </Link>
                 <div className="flex flex-row-reverse justify-center items-center">
@@ -70,7 +73,7 @@ const MustRead = () => {
                     author={data.author}
                     category={data.category}
                     thumbnail={data.thumbnail}
-                    id={data.id}
+                    id={`/ArticlePost/${data.id}`}
                     title={data.title}
                     key={data.id}
                   />

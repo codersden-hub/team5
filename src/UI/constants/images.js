@@ -14,6 +14,8 @@ import avatar2 from "../../../Assets/Images/avatar2.png";
 import avatar3 from "../../../Assets/Images/avatar3.png";
 import avatar4 from "../../../Assets/Images/avatar4.png";
 import avatar5 from "../../../Assets/Images/avatar5.png";
+import gamesNight from "../../../Assets/Images/games.jpg";
+import hackerthon from "../../../Assets/Images/hackerthon.jpg";
 export default {
   quote1,
   quote2,
@@ -30,4 +32,6 @@ export default {
   avatar3,
   avatar4,
   avatar5,
+  gamesNight,
+  hackerthon,
 };
