@@ -7,11 +7,8 @@ import MustReadArticleSkeleton from "../Skeleton/MustReadArticleSkeleton";
 
 const MustRead = () => {
   const { articlesData } = useGlobalContext();
-
   // Check if there are articles and get the last one
-  const LastPosted = articlesData.length
-    ? articlesData[articlesData.length - 1]
-    : null;
+  const LastPosted = articlesData.length ? articlesData[0] : null;
   return (
     <>
       {articlesData.length === 0 ? (
@@ -50,7 +47,10 @@ const MustRead = () => {
                   }}
                   className="p-main-text m-3 .d-text"
                 />
-                <Link className="text-hover-dark font-sans py-2 text-center w-full scale-75 hover:scale-90">
+                <Link
+                  to={`/ArticlePost/${LastPosted.id}`}
+                  className="text-hover-dark font-sans py-2 text-center w-full scale-75 hover:scale-90"
+                >
                   Read More
                 </Link>
                 <div className="flex flex-row-reverse justify-center items-center">
@@ -62,19 +62,16 @@ const MustRead = () => {
 
             <div className="w-full lg:w-2/5 flex flex-col justify-start items-start">
               {/* <SidePost /> */}
-              {articlesData
-                .slice(-4)
-                .reverse()
-                .map((data) => (
-                  <SidePost
-                    author={data.author}
-                    category={data.category}
-                    thumbnail={data.thumbnail}
-                    id={data.id}
-                    title={data.title}
-                    key={data.id}
-                  />
-                ))}
+              {articlesData.slice(1, 4).map((data) => (
+                <SidePost
+                  author={data.author}
+                  category={data.category}
+                  thumbnail={data.thumbnail}
+                  id={`/ArticlePost/${data.id}`}
+                  title={data.title}
+                  key={data.id}
+                />
+              ))}
             </div>
           </div>
         </div>

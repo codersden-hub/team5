@@ -1,11 +1,12 @@
 import React from "react";
 import images from "../../UI/constants/images";
+import { Link } from "react-router-dom";
 
 const SidePost = ({ author, thumbnail, id, title, category }) => {
   return (
-    <div
-      className="flex flex-col lg:flex-row justify-start items-start gap-1 cursor-pointer rounded hover:bg-cards-light border p-3 mb-3 mr-1 w-full dark:hover:bg-[#0a0a0a]"
-      id={id}
+    <Link
+      to={id}
+      className="flex flex-col lg:flex-row justify-start items-start gap-1 cursor-pointer rounded hover:bg-cards-light p-3 mb-3 mr-1 w-full dark:hover:bg-[#0a0a0a]"
     >
       <div className="w-full h-60 lg:h-[146px]  lg:w-60">
         <img
@@ -29,7 +30,7 @@ const SidePost = ({ author, thumbnail, id, title, category }) => {
           <div className="w-10 h-[1px] bg-light-text dark:bg-dark-text" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 export default SidePost;
