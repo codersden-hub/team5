@@ -112,7 +112,7 @@ export const articles = [
     headLine: "The Future of JavaScript Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.quote1,
+    thumbnail: images.quote3,
     comment: [
       {
         username: "AsyncCoder",
@@ -163,7 +163,7 @@ export const articles = [
     headLine: "The Future of Artificial Intelligence Trends and Implication.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.quote2,
+    thumbnail: images.quote4,
 
     comment: [
       {
@@ -215,7 +215,7 @@ export const articles = [
     headLine: "The Best Practices For UI/UX Design 2023.",
     minContent:
       "The  Future of Artificial Intelligence Trends and Implication and many more stories to come",
-    thumbnail: images.quote1,
+    thumbnail: images.quote5,
 
     comment: [
       {

@@ -49,7 +49,7 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
         {recentCategories.map((category, index) => (
           <button
             key={index}
-            className={`px-2 py-1 border rounded mr-2 group hover:bg-cards-light transition duration-300 ${
+            className={`px-2 py-1 border rounded mr-2 group hover:bg-cards-light dark:hover:bg-[#ccc] dark:border-border-dark dark:text-dark-text transition duration-300 ${
               searchCategory.toLowerCase() === category.toLowerCase()
                 ? "bg-blue-500 text-white"
                 : ""
