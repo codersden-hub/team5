@@ -42,12 +42,14 @@ const HeaderAndFilter = ({ categories, onCategoryChange }) => {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row font-sans items-center justify-between m-10 mb-8">
-      <h1 className="text-3xl font-semibold">Latest Articles</h1>
+      <h3 className="relative inline-block font-semibold lg:font-bold  text-light-header dark:text-dark-header font-sans uppercase">
+        Latest Articles
+      </h3>
       <div className="flex items-center">
         {recentCategories.map((category, index) => (
           <button
             key={index}
-            className={`px-2 py-1 border rounded mr-2 group hover:bg-cards-light transition duration-300 ${
+            className={`px-2 py-1 border rounded mr-2 group hover:bg-cards-light dark:hover:bg-[#ccc] dark:border-border-dark dark:text-dark-text transition duration-300 ${
               searchCategory.toLowerCase() === category.toLowerCase()
                 ? "bg-blue-500 text-white"
                 : ""

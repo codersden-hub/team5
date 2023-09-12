@@ -38,7 +38,7 @@ export const ContextApp = ({ children }) => {
   const [role, setRole] = useState(null);
   const [commentsAvailability, setCommentAvailability] = useState(true);
   const [textContent, setTextContent] = useState("");
-  // const notify = () => toast.error("Here is your toast");
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   //  const [display, setDisplay] = useState("Add User");
 
@@ -82,17 +82,36 @@ export const ContextApp = ({ children }) => {
     getUser();
   }, []);
 
+  const handleOnlineStatusChange = () => {
+    setIsOnline(navigator.onLine);
+  };
+
+  useEffect(() => {
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
   const getPosts = async () => {
-    const data = await getDocs(posts);
-    let postData = data.docs.map((item) => {
-      return { ...item.data(), id: item.id };
-    });
-    setArticlesData(postData);
+    if (isOnline) {
+      const data = await getDocs(posts);
+      let postData = data.docs.map((item) => {
+        return { ...item.data(), id: item.id };
+      });
+      setArticlesData(postData);
+    } else {
+      // Handle the case when the user is offline
+      toast.error("You are currently offline. Unable to fetch data.");
+    }
   };
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [isOnline]);
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);
