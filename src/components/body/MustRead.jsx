@@ -7,11 +7,8 @@ import MustReadArticleSkeleton from "../Skeleton/MustReadArticleSkeleton";
 
 const MustRead = () => {
   const { articlesData } = useGlobalContext();
-
   // Check if there are articles and get the last one
-  const LastPosted = articlesData.length
-    ? articlesData[articlesData.length - 1]
-    : null;
+  const LastPosted = articlesData.length ? articlesData[0] : null;
   return (
     <>
       {articlesData.length === 0 ? (
@@ -65,19 +62,16 @@ const MustRead = () => {
 
             <div className="w-full lg:w-2/5 flex flex-col justify-start items-start">
               {/* <SidePost /> */}
-              {articlesData
-                .slice(-4)
-                .reverse()
-                .map((data) => (
-                  <SidePost
-                    author={data.author}
-                    category={data.category}
-                    thumbnail={data.thumbnail}
-                    id={`/ArticlePost/${data.id}`}
-                    title={data.title}
-                    key={data.id}
-                  />
-                ))}
+              {articlesData.slice(1, 4).map((data) => (
+                <SidePost
+                  author={data.author}
+                  category={data.category}
+                  thumbnail={data.thumbnail}
+                  id={`/ArticlePost/${data.id}`}
+                  title={data.title}
+                  key={data.id}
+                />
+              ))}
             </div>
           </div>
         </div>

@@ -97,21 +97,20 @@ export const ContextApp = ({ children }) => {
   }, []);
 
   const getPosts = async () => {
-    if (isOnline) {
-      const data = await getDocs(posts);
+    const data = await getDocs(posts);
+    if (data) {
       let postData = data.docs.map((item) => {
         return { ...item.data(), id: item.id };
       });
       setArticlesData(postData);
     } else {
-      // Handle the case when the user is offline
-      toast.error("You are currently offline. Unable to fetch data.");
+      toast.error("Unable To Fetch Article. Please Try Reloading Your Page");
     }
   };
 
   useEffect(() => {
     getPosts();
-  }, [isOnline]);
+  }, []);
 
   // CREATE ACCOUNT FUNCTION FOR NEW USERS
   const auth = getAuth(app);

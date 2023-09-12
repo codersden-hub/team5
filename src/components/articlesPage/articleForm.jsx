@@ -44,7 +44,7 @@ const ArticleForm = ({ onSubmit }) => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md dark:shadow-cards-light"
+        className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md dark:shadow-cards-light mb-10"
       >
         {showPreview ? (
           <ArticlePreview
